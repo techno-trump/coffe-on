@@ -180,8 +180,10 @@ export const generateFontFaces = (cb) => {
 		
 		const sources = formats.map(([fileName, ext]) => {
 			const format = formatMap[ext];
-			return `url('${process.argv.includes('--prod') ? "./" : "/assets/"}fonts/${fileName}') format('${format}')`;
+				console.log(process.argv);
+			return `url('${process.argv.includes('--prod') ? "" : "/assets/"}fonts/${fileName}') format('${format}')`;
 		}).join(",");
+			console.log(sources);
 
 		return `@font-face {\n\tfont-family: '${fontName}';\n\tsrc: local('☺'), ${sources};\n\tfont-weight: ${weightMap[fontWeight]};\n\tfont-style: ${fontStyle};\nfont-display: swap;\n}\n`;
 	}

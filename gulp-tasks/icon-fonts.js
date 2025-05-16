@@ -28,7 +28,9 @@ export const processFontFaces = (cb) => {
 	try {
 		facesSrc = fs.readFileSync(facesSrcPath, 'utf8');
 		facesDestFile = fs.openSync(facesDestPath, "wx");
-		const pathedFaces = facesSrc.replace(/fonts\//g, `${process.argv.includes('--prod') ? "./" : "/assets/"}fonts/`);
+		let pathedFaces = facesSrc.replace(/fonts\//g, `${process.argv.includes('--prod') ? "./" : "/assets/"}fonts/`);
+		pathedFaces = pathedFaces.replace(".icon- {", `[class^="icon-"], [class*=" icon-"] {`);
+			console.log(pathedFaces);
 		fs.writeSync(facesDestFile, pathedFaces, null);
 		fs.closeSync(facesDestFile);
 	} catch(ex) {
@@ -39,7 +41,7 @@ export const processFontFaces = (cb) => {
 	cb();
 }
 export const copyFonts = () => {
-	return gulp.src(fontsSrcPath)
+	return gulp.src(fontsSrcPath, { encoding: false })
 		.pipe(gulp.dest(fontsDestPath));
 }
 export const processIconFonts = gulp.series(processFontFaces, copyFonts);
