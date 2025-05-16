@@ -1,0 +1,175 @@
+@use "./config.scss" as config;
+@use "./mixins.scss" as mixins;
+
+:root {
+	display: flex;
+	flex-direction: column;
+	font-family: "Montserrat";
+	min-height: 100%;
+
+	--light-900: white;
+	--light-907: rgba(255, 255, 255, 0.70);
+	
+	--dark-900: black;
+	--dark-907: rgba(0, 0, 0, 0.70);
+	--dark-903: rgba(0, 0, 0, 0.30);
+	--dark-901: rgba(0, 0, 0, 0.10);
+	--gray-300: #f7f7f7;
+	--gray-400: #f1f1f1;
+	--gray-500: #dddddd;
+	--gray-600: #8d8d8d;
+	--gray-700: #616162;
+	--rose-500: #ff604b;
+	--blue-300: rgba(0, 183, 255, 0.884);
+	--blue-600: rgb(0, 129, 180);
+
+	--brand-primary-color: #19a9dd;
+
+	--green-700: rgb(37, 136, 37);
+	--container-save-space: 32px;
+	@media (max-width: config.$mbpMM) {
+		--container-save-space: 16px;
+	}
+}
+.btn {
+	display: inline-block;
+	white-space: nowrap;
+	transition: color 0.3s, background-color 0.3s, transform 0.3s, opacity 0.3s, box-shadow 0.3s, border-color 0.3s;
+	color: var(--color, black);
+	background-color: var(--bg-color, transparent);
+	cursor: pointer;
+	text-align: center;
+	&_primary {
+		--color: var(--light-900);
+		--bg-color: var(--dark-900);
+		--hover-bg-color: var(--dark-907);
+		padding: 14px 20px;
+		border-radius: 5px;
+	}
+	&_social {
+		padding: 4px;
+	}
+	&_social &__icon {
+		font-size: 24px;
+	}
+	&_nav {
+		--color: var(--dark-900);
+		--bg-color: var(--light-907);
+		--hover-bg-color: var(--light-900);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		font-size: 20px;
+		border-radius: 50%;
+		cursor: pointer;
+	}
+	&_prev &__icon {
+		position: relative;
+		left: -0.05em;
+	}
+	&_next &__icon {
+		position: relative;
+		left: 0.08em;
+	}
+	@media (any-hover: hover) {
+		&:not(:disabled):hover {
+			color: var(--hover-color, var(--color));
+			--bg-color: var(--hover-bg-color);
+			//background-color: var(--hover-bg-color, var(--bg-color, transparent));
+			transform: var(--hover-transform, none);
+			opacity: var(--hover-opacity, 1);
+			//box-shadow: 5px 5px 15px 0px var(--hover-shadow-color, transparent);
+			border-color: var(--hover-border-color, var(--border-color, transparent));
+		}
+	}
+	&:disabled {
+		opacity: 0.6;
+	}
+}
+
+.logo {
+	display: inline-block;
+	transition: opacity 0.3s;
+	&_dark {
+		filter: invert(1);
+	}
+	&__img {
+		width: var(--width, 120px);
+		height: var(--height, 20px);
+		object-fit: contain;
+	}
+	&__caption {
+		position: absolute;
+		visibility: hidden;
+	}
+	@media (any-hover: hover) {
+		&:hover {
+			opacity: 0.6;
+		}
+	}
+}
+.drawers {
+	position: relative;
+	z-index: 10000;
+}
+.drawer {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: calc(100% - var(--scroll-compensation));
+	height: 100%;
+	z-index: var(--z-index, 1);
+	&_dialog {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.3s, visibility 0.3s;
+		background-color: var(--dark-903);
+	}
+	&_dialog#{&}_open {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0px);
+	}
+	&_dialog &__panel {
+		background-color: var(--light-900);
+		border-radius: 8px;
+		overflow: hidden;
+		max-width: 500px;
+		width: 100%;
+		transform: translateY(10px);
+		transition: transform 0.3s;
+	}
+	&_dialog#{&}_open &__panel {
+		transform: translateY(0px);
+	}
+	&_dialog &__header {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		align-items: center;
+		color: var(--light-900);
+		font-weight: 600;
+		padding: 12px 12px 12px 20px;
+		background-color: var(--dark-900);
+	}
+	&_dialog &__body {
+		font-size: 18px;
+		line-height: 1.4;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding: 30px;
+		background-color: var(--light-900);
+	}
+	&:not(.drawer_open) {
+		pointer-events: none;
+	}
+	&:not(#{&}_modal) {
+		pointer-events: none;
+	}
+
+}

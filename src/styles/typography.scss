@@ -1,0 +1,14 @@
+@use "./config.scss" as config;
+
+.tg-section-title {
+	font-size: 32px;
+	line-height: 1.3;
+	text-align: center;
+	&_margin {
+		margin-bottom: 30px;
+	}
+}
+.tg-section-regular {
+	font-size: 21px;
+	line-height: 1.8;
+}

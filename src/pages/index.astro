@@ -1,0 +1,23 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Boilerplate" description="Index page" empty={true}>
+	<div class="container">
+		<div class="pages">
+			<h3>Pages</h3>
+			<ol>
+				<li><a href="./home.html" class="link">Home</a></li>
+			</ol>
+		</div>
+	</div>
+</Layout>
+<style>
+	.container {
+		padding: 40px;
+	}
+	h3 {
+		font-weight: 600;
+		margin-bottom: 20px;
+	}
+</style>

@@ -1,0 +1,42 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	empty?: boolean;
+}
+
+const { title, description, empty = false } = Astro.props;
+
+const mode = import.meta.env.MODE as ("development" | "production");
+---
+
+<!doctype html>
+<html lang="en" data-mode={mode}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/x-icon" href="favicon-32x32.png" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="app-mode" content={mode} />
+		<style is:inline>
+			/* @import url(https://fonts.googleapis.com/css?family=Inter+Tight:regular,500,600,700,500italic&display=swap); */
+			@import url(https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic&display=swap);
+		</style>
+		{mode === "production" && <link rel="stylesheet" href="./assets/main.css" />}
+		<script is:inline src="./libs/fslightbox.js" type="module"></script>
+		<script is:inline src="./assets/main.js" type="module"></script>
+		<title>{title}</title>
+	</head>
+	<body class="tg-regular">
+		{empty ? null : <Header></Header>}
+		<main>
+			<slot />
+		</main>
+		{empty ? null : <Footer></Footer>}
+		<slot name="drawers" />
+	</body>
+</html>

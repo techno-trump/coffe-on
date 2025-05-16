@@ -1,0 +1,47 @@
+{
+  "name": "astro-webpack-boilerplate",
+  "type": "module",
+  "version": "0.0.3",
+  "scripts": {
+    "generate-webp": "node generate-webp.js",
+    "dev": "concurrently \"gulp generateFontFaces convertIconFontsFaces --rewrite && webpack serve --config webpack.dev.js\" \"astro dev --host\"",
+    "start": "astro dev",
+    "build": "astro check && astro build && gulp --rewrite --prod && webpack --config webpack.prod.js",
+    "dev-build": "astro check && astro build --mode development && gulp --rewrite --prod && webpack --config webpack.prod.js",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.5.9",
+    "astro": "^4.5.4",
+    "keen-slider": "^6.8.6",
+    "lenis": "^1.1.20",
+    "lodash.throttle": "^4.1.1",
+    "sass": "^1.83.0",
+    "swiper": "^11.2.5",
+    "tom-select": "^2.4.1",
+    "vanilla-drawers": "^1.1.23",
+    "vite-plugin-mkcert": "^1.17.6"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "css-loader": "^7.1.2",
+    "gulp": "^4.0.2",
+    "gulp-fonter-fix": "^0.0.1",
+    "gulp-notify": "^4.0.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-ttf2woff": "^1.1.1",
+    "gulp-ttf2woff2": "^4.0.1",
+    "mini-css-extract-plugin": "^2.9.2",
+    "sass-loader": "^16.0.4",
+    "sharp": "^0.33.5",
+    "string-replace-loader": "^3.1.0",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.7.2",
+    "vite-plugin-imagemin": "^0.6.1",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.0",
+    "webpack-dev-server": "^5.2.0"
+  }
+}

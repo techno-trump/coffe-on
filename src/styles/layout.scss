@@ -1,0 +1,61 @@
+@use "./config.scss" as config;
+:root {
+	--section-space: 50px;
+	@media (max-width: config.$mbpT) {
+		--section-space: 36px;
+	}
+	// @media (max-width: config.$mbpM) {
+	// 	--section-space: 24px;
+	// }
+}
+.section-space {
+	padding-top: var(--section-space);
+}
+.section-space-bottom, .section-space {
+	padding-bottom: var(--section-space);
+}
+html {
+	--scroll-width: 0px;
+	&:not(.is-mobile) {
+		--scroll-width: 17px;
+	}
+	--scroll-compensation: 0px;
+}
+html.scroll-lock-by-drawer {
+	overflow: hidden;
+	--scroll-compensation: var(--scroll-width);
+	padding-right: var(--scroll-width);
+}
+body {
+	flex: 1 1 auto;
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+body main {
+	flex: 1 1 auto;
+}
+.container {
+	width: 100%;
+	margin: auto;
+	padding-left: var(--container-save-space);
+	padding-right: var(--container-save-space);
+	&_wide {
+		max-width: 1440px;
+	}
+}
+
+.flex-even {
+	&__inner {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: var(--justify-content);
+		margin-left: calc(var(--row-gap, var(--gap, 0)) * -1);
+		margin-top: calc(var(--column-gap, var(--gap, 0)) * -1);
+	}
+	&__item {
+		flex: 0 0 var(--item-flex-basis);
+		padding-left: var(--row-gap, var(--gap, 0));
+		padding-top: var(--column-gap, var(--gap, 0));
+	}
+}

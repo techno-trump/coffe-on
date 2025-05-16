@@ -1,0 +1,44 @@
+@use "./config.scss" as config;
+
+.burger-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--size, 32px);
+	height: var(--size, 32px);
+	transition: none;
+	&__inner {
+		position: relative;
+		display: inline-grid;
+		gap: 4px;
+		width: 18px;
+		& > span {
+			display: block;
+			width: 100%;
+			height: 2px;
+			border-radius: 2px;
+			background-color: var(--color, currentColor);
+			transition: transform 0.4s;
+			&:nth-child(2) {
+				transition-delay: 0.2s, 0s;
+			}
+			&:last-child {
+  			transition-delay: 0.1s;
+			}
+		}
+	}
+	.drawer-trigger_active &__inner {
+		& > span {
+			&:first-child {
+				transform: translateY(3px) rotate(135deg);
+			}
+			&:nth-child(2) {
+				transform: translateY(-3px) rotate(-135deg);
+			}
+			&:last-child {
+				opacity: 0;
+				transform: rotate(180deg);
+			}
+		}
+	}
+}
