@@ -1,0 +1,25 @@
+@use "./config.scss" as config;
+@use "./mixins.scss" as mi;
+
+.section-404 {
+	&__inner {
+		max-width: mi.rem(620);
+		margin: auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+		gap: mi.rem(20);
+		padding: max(9vw, mi.rem(130)) 0;
+		@media (max-width: config.$mbpM) {
+			gap: 15px;
+		}
+	}
+	&__text {
+	}
+	&__desc {
+		color: var(--color-text-base-muted);
+	}
+	&__btn {
+	}
+}

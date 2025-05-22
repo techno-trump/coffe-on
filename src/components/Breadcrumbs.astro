@@ -1,0 +1,13 @@
+---
+	interface Props {
+		current?: string;
+		className?: string;
+	}
+
+	const { className, current } = Astro.props;
+---
+<nav aria-label="Breadcrumbs" class:list={["breadcrumbs tg-text-mini", className]} >
+	<a href="/" class="breadcrumbs__item link">Главная</a>
+	<span class="breadcrumbs__separator icon-arrow-right"></span>
+	<span class="breadcrumbs__item breadcrumbs__item_active">{current}</span>
+</nav>

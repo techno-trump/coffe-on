@@ -1,11 +1,17 @@
 import "../styles/index.scss";
+import intlTelInput from 'intl-tel-input';
+import Inputmask from "inputmask/dist/inputmask.es6.js";
 import "vanilla-drawers";
 import throttle from "lodash.throttle";
 import Swiper from "swiper";
 import { Autoplay, Navigation } from "swiper/modules";
+import gsap from "gsap";
+import "./select.js";
+import "./range-slider.js";
+import { ru } from "intl-tel-input/i18n"; // Russian
 
-import { isMobile } from "./utils.js";
-//import initDisclosures from "./disclosure.js";
+import { isMobile, addLeadingZero } from "./utils.js";
+import initDisclosures from "./disclosure.js";
 import Lenis from 'lenis';
 
 window.app = window.app || {};
@@ -13,10 +19,31 @@ window.app.hoverMedia = window.matchMedia("(any-hover: hover)");
 window.app.lenis =  new Lenis({
 	autoRaf: true,
 })
-document.documentElement.classList.toggle("is-mobile", isMobile.any());
 
-//initDisclosures();
+document.documentElement.classList.toggle("is-mobile", isMobile.any());
+document.documentElement.style.setProperty("--scroll-width", `${window.innerWidth - document.documentElement.offsetWidth}px`);
+
+matchMedia("(min-width: 1301px)").addEventListener("change", () => app.drawers.close("burger-panel"));
+
+initDisclosures();
 app.drawers.init();
+
+app.drawers.get("coockies-drawer")?.setOptions({ closeOnUnderlayClick: false });
+
+// Show secondary header
+const secondaryHeader = document.querySelector(".header_second");
+const goUpBtn = document.querySelector(`[data-component=":go-up-btn:"]`);
+goUpBtn.addEventListener("click", () => window.app.lenis.scrollTo(0, {
+	lerp: 0.08,
+	easing: (x) => x < 0.5 ? 16 * x * x * x * x * x : 1 - Math.pow(-2 * x + 2, 5) / 2,
+	duration: 2
+}));
+goUpBtn.classList.add("_initialized");
+document.addEventListener("scroll", throttle(() => {
+	const show = window.scrollY > (window.innerHeight / 3);
+	secondaryHeader.classList.toggle("header_show", show);
+	goUpBtn.classList.toggle("_show", show);
+}));
 
 const intersectionObserver = new IntersectionObserver((entries) => {
 	entries.forEach(entry => {
@@ -30,118 +57,179 @@ document.querySelectorAll(`[data-component*=":intersection-observer:"]`).forEach
 	intersectionObserver.observe(elem);
 });
 
-// initFooterSubscription();
+document.querySelectorAll(`[data-component*=":tel-input:"]`).forEach(root => {
+	const iti = intlTelInput(root, {
+		initialCountry: "ru",
+		nationalMode: true,
+		separateDialCode: true,
+		i18n: ru,
+		formatOnDisplay: false,
+		loadUtils: () => import("intl-tel-input/utils"),
+	});
+	iti.promise.then(useMask);
+	root.addEventListener("countrychange", useMask);
 
-// function initFooterSubscription() {
-// 	const form = document.querySelector("#subscribe-form");
-// 	const input = document.querySelector(".subscribe__input");
-// 	const errorModalBody = document.querySelector(`[data-drawer="subscription-error"] .drawer__body`);
-// 	const errorMsgTemplate = errorModalBody.innerHTML;
+	function useMask() {
+		const { utils } = intlTelInput;
+		if (!utils) return;
+		const country = iti.getSelectedCountryData();
+		const example = root.getAttribute("placeholder");//utils.getExampleNumber(country.iso2, true, utils.numberType.MOBILE);
+		//const formatted = utils.formatNumber(example, country.iso2, utils.numberFormat.NATIONAL);
+		const mask = example.replace(/^.*?\(/, "(").replace(/[0-9]/g, "9");
+		Inputmask({ mask, rightAlign: false }).mask(root);
+	}
+});
 
-// 	const send = async (token) => {
-// 		const API_KEY = "11EB8AC1618FB46A9AAE12EE88221E3B";
-// 		const email = input.value;
-// 		try {
-// 			const response = await fetch("https://api.adwayusa.com/add/email", {
-// 				method: "POST",
-// 				headers: {
-// 					"Content-Type": "multipart/form-data",
-// 				},
-// 				body: JSON.stringify({
-// 					API_KEY,
-// 					data: {
-// 						email,
-// 					},
-// 				}),
-// 			});
-			
-// 			if (response.ok) {
-// 				// const result = await response.json();
-// 				window.app.drawers.open("subscription-success");
-// 			} else {
-// 				throw new Error(response.statusText);
-// 			}
-// 		} catch(ex) {
-// 				console.error(ex);
-// 			errorModalBody.innerHTML = errorMsgTemplate.replace("{{error-msg}}", `Error: ${ex.message}`);
-// 			window.app.drawers.open("subscription-error");
-// 		}
-// 	}
-// 	form.addEventListener("submit", (e) => {
-// 		e.preventDefault();
+document.querySelectorAll(`[data-component*=":hero-slider:"]`).forEach(root => {
+	const autoplayDelay = Number(root.getAttribute("data-autoplay-delay") || 3000);
+	const prev = root.querySelector("[data-elem='hero-slider.prev']");
+	const next = root.querySelector("[data-elem='hero-slider.next']");
 
-// 		grecaptcha.execute(window.app.grecaptchaSiteKey, {action: 'submit'})
-// 		.then(send);
-// 	});
-// }
+	const current = root.querySelector("[data-elem='hero-slider.current']");
+	const total = root.querySelector("[data-elem='hero-slider.total']");
+	const timerBar = root.querySelector("[data-elem='hero-slider.timer-bar']");
 
-// Hide title
-// document.addEventListener("scroll", throttle(() => {
-// 	document.documentElement.classList.toggle("hide-title", window.scrollY > 50);
-// }));
+	const setCurrent = (next) => current.textContent = addLeadingZero(next);
 
-// Navigation
-// document.querySelectorAll(`[href*="#"]`).forEach(elem => {
-// 	elem.addEventListener("click", (e) => {
-// 		e.preventDefault();
-// 		const pattern = /.*?(\#.*)/;
-// 		const href = elem.getAttribute("href");
-// 		const match = href.match(pattern);
-// 		const anchor = match ? match[1] : null;
+	new Swiper(root, {
+		wrapperClass: "hero-section__slider-wrap",
+		slideClass: "hero-section__slide",
+		loop: true,
+		"modules": [Autoplay, Navigation],
+		"autoplay": {
+			"delay": autoplayDelay,
+			disableOnInteraction: false,
+		},
+		navigation: {
+			prevEl: prev,
+			nextEl: next,
+		},
+		"slidesPerView": 1,
+		on: {
+			afterInit: function() {
+				setCurrent(this.realIndex + 1);
+				total.textContent = addLeadingZero(this.slides.length);
+			},
+			slideChange: function() {
+				setCurrent(this.realIndex + 1);
+			},
+			autoplayTimeLeft: throttle(function(_,__, percentage) {
+				timerBar.style.setProperty("--progress", `${(1 - percentage) * 100}%`);
+			}, 200)
+		}
+	});
+});
 
-// 		history.pushState(null, "", anchor);
-// 		app.drawers.close("main-menu");
-// 		window.app.lenis.scrollTo(anchor, { offset: -80 });
-// 	});
-// });
+document.querySelectorAll(`[data-component*=":logos-slider:"]`).forEach(root => {
+	new Swiper(root, {
+		wrapperClass: "clients-section__logos-wrap",
+		slideClass: "clients-section__logo",
+		direction: "horizontal",
+		loop: true,
+		"modules": [Autoplay],
+		speed: 5000,
+		allowTouchMove: false,
+		spaceBetween: 10,
+		"autoplay": {
+			"delay": 0,
+			disableOnInteraction: false,
+		},
+		slidesPerView: 1.6,
+		breakpoints: {
+			"992": {
+				direction: "vertical",
+				slidesPerView: "auto",
+			},
+			"640": {
+				direction: "horizontal",
+				slidesPerView: 2.8,
+			},
+			"390": {
+				direction: "horizontal",
+				slidesPerView: 2,
+			}
+		}
+	});
+});
 
+document.querySelectorAll(`[data-component*=":staff-slider:"]`).forEach(root => {
+	new Swiper(root, {
+		wrapperClass: "staff-slider__wrapper",
+		slideClass: "staff-slider__slide",
+		loop: true,
+		"modules": [Autoplay],
+		speed: 10000,
+		allowTouchMove: false,
+		"autoplay": {
+			"delay": 0,
+		},
+		slidesPerView: 1.4,
+		breakpoints: {
+			992: {
+				slidesPerView: "auto",
+			},
+			768: {
+				slidesPerView: 2.4,
+			},
+			575: {
+				slidesPerView: 1.8,
+			}
+		}
+	});
+});
 
-// document.querySelectorAll(`[data-component*=":case-studies-slider:"]`).forEach(root => {
-// 	new Swiper(root, {
-// 		"modules": [Navigation],
-// 		wrapperClass: "case-studies__wrap",
-// 		slideClass: "case-study-card",
-// 		slidesPerView: 1.2,
-// 		spaceBetween: 20,
-// 		navigation: {
-// 			prevEl: ".case-studies__prev",
-// 			nextEl: ".case-studies__next"
-// 		},
-// 		breakpoints: {
-// 			1500: {
-// 				slidesPerView: 4,
-// 				spaceBetween: 30,
-// 			},
-// 			1100: {
-// 				slidesPerView: 4,
-// 				spaceBetween: 20,
-// 			},
-// 			800: {
-// 				slidesPerView: 3,
-// 				spaceBetween: 20,
-// 			},
-// 			560: {
-// 				slidesPerView: 2,
-// 				spaceBetween: 20,
-// 			}
-// 		}
-// 	});
-// });
-// document.querySelectorAll(`[data-component*=":trusted-by-slider:"]`).forEach(root => {
-// 		console.log(root);
-// 	new Swiper(root, {
-// 		wrapperClass: "trusted-by__list",
-// 		slideClass: "trusted-by__item",
-// 		"modules": [Autoplay],
-// 		"loop": true,
-// 		speed: 4000,
-// 		"autoplay": {
-// 			"delay": 0,
-// 			disableOnInteraction: false,
-// 		},
-		
-// 		"slidesPerView": "auto",
-// 		"freeMode": true,
-// 		spaceBetween: 20,
-// 	});
-// });
+document.querySelectorAll(`[data-component*=":news-slider:"]`).forEach(root => {
+	const slider = root.querySelector(`[data-elem="news-slider.slider"]`);
+	const prev = root.querySelector(`[data-elem="news-slider.prev"]`);
+	const next = root.querySelector(`[data-elem="news-slider.next"]`);
+
+	new Swiper(slider, {
+		"modules": [Navigation],
+		wrapperClass: "news-list-section__wrapper",
+		slideClass: "news-list-section__slide",
+		loop: true,
+		slidesPerView: 1,
+		navigation: {
+			prevEl: prev,
+			nextEl: next
+		},
+		breakpoints: {
+			992: {
+				slidesPerView: "auto",
+			},
+			768: {
+				slidesPerView: 2.4,
+			},
+			575: {
+				slidesPerView: 1.6,
+			}
+		}
+	});
+});
+
+document.querySelectorAll(`[data-component*=":cases-slider:"]`).forEach(root => {
+	const cursor = root.querySelector(".cases-slider-section__cursor");
+	const slider = new Swiper(root, {
+		wrapperClass: "cases-slider-section__wrapper",
+		slideClass: "cases-slider-section__slide",
+		direction: "horizontal",
+		loop: true,
+		spaceBetween: 20,
+		slidesPerView: "auto",
+	});
+
+	const minTwin = gsap.fromTo(cursor, { scale: 1 }, { scale: 0, duration: 0.3 });
+
+	root.addEventListener("pointerover", () => minTwin.reverse());
+	root.addEventListener("pointerout", () => minTwin.play());
+	
+
+	let xTo = gsap.quickTo(cursor, "x", { duration: 0.2, ease: "power3" }),
+			yTo = gsap.quickTo(cursor, "y", { duration: 0.2, ease: "power3" });
+
+	document.addEventListener("pointermove", (e) => {
+		xTo(e.clientX - cursor.offsetWidth / 2);
+		yTo(e.clientY - cursor.offsetHeight / 2);
+	});
+});
+document.documentElement.classList.add("_initialized");

@@ -1,9 +1,13 @@
-document.querySelectorAll(`.range-slider`).forEach(elem => {
+document.querySelectorAll(`[data-component*=":range-slider:"]`).forEach(root => {
+	const input = root.matches("input") ? root : root.querySelector("input");
+	const current = root.querySelector(`[data-elem="range-slider.current"]`);
 	const recalcProgress = () => {
-		const min = parseFloat(elem.getAttribute("min"));
-		const max = parseFloat(elem.getAttribute("max"));
-		elem.style.setProperty("--progress", `${(elem.value - min) / (max - min) * 100}%`);
+		const min = parseFloat(input.getAttribute("min"));
+		const max = parseFloat(input.getAttribute("max"));
+		current.textContent = input.value;
+		root.style.setProperty("--progress", `${(input.value - min) / (max - min) * 100}%`);
+		root.style.setProperty("--raw-progress", `${(input.value - min) / (max - min)}`);
 	};
 	recalcProgress();
-	elem.addEventListener("input", recalcProgress);
+	input.addEventListener("input", recalcProgress);
 });

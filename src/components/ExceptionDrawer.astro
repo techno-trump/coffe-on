@@ -1,0 +1,24 @@
+---
+import Social from "./Social.astro";
+---
+
+<div class="drawer drawer_primary drawer_center response-drawer" data-drawer="exception-drawer">
+	<div class="drawer__close-btn drawer__close-btn_mob" data-drawer-close="exception-drawer"></div>
+	<div class="drawer__panel drawer__panel" data-elem="drawer.panel">
+		<div class="drawer__header">
+			<div class="drawer__title tg-h2">Что-то пошло не так...</div>
+			<div class="drawer__close-btn drawer__close-btn_desc" data-drawer-close="exception-drawer"></div>
+		</div>
+		<div class="drawer__body response-drawer__body">
+			<div class="tg-text-normal response-drawer__text">Похоже, возникла проблема при отправке формы. Пожалуйста, попробуйте снова чуть позже или свяжитесь с нами напрямую.</div>
+			<div class="response-drawer__contacts">
+				<Social mode="inverse" size="lg"/>
+				<a href="tel:+70000000000" class="btn btn_link"><span class="btn__label tg-text-big">+ 7 (000) 000-00-00</span></a>
+			</div>
+			<a href="/" class="contact-form-drawer__submit btn btn_rect btn_lg btn_primary">
+				<span class="btn__label">Вернуться на главную</span>
+				<span class="btn__icon icon-arrow-right"></span>
+			</a>
+		</div>
+	</div>
+</div>

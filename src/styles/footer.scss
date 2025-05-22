@@ -1,1 +1,221 @@
 @use "./config.scss" as config;
+@use "./mixins.scss" as mi;
+
+.footer {
+	color: var(--color-text-inverse);
+	background-color: var(--color-sf-alt);
+	--link-hover-color: var(--color-primary-lvl-up);
+	overflow: hidden;
+	&__container {
+		display: grid;
+		grid-template-columns: 4.4fr 4.6fr 4.6fr;
+		grid-template-areas: 	"logo tel email"
+													"cta nav social"
+													"policy address dev";
+		@media (max-width: config.$mbpT) {
+			grid-template-areas: 	"logo tel tel"
+														"cta email email"
+														"address social nav"
+														"policy dev dev";
+		}
+		@media (max-width: config.$mbpM) {
+			grid-template-columns: auto auto 1fr;
+			grid-template-areas: 	"logo cta cta"
+														"tel tel tel"
+														"email email email"
+														"social social social"
+														"nav nav nav"
+														"address address address"
+														"policy policy dev";
+			padding: 50px 0;
+		}
+		@media (max-width: config.$mbpMM) {
+			grid-template-columns: 1fr;
+			grid-template-areas: 	"logo"
+														"cta"
+														"tel"
+														"email"
+														"social"
+														"nav"
+														"address"
+														"policy"
+														"dev";
+		}
+	}
+	&__logo {
+		margin-bottom: mi.rem(5);
+	}
+	&__logo-desc {
+		color: var(--color-text-inverse-muted);
+		opacity: 0.8;
+	}
+	&__section {
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+		padding: mi.rem(40) mi.rem(20);
+		@media (min-width: (config.$mbpT + 1px)) {
+			border-left: mi.rem(1) solid var(--color-border-alfa);
+			&:nth-child(3n + 1) {
+				padding-left: 0;
+				border-left: none;
+			}
+			&:nth-child(3n + 3) {
+				padding-right: 0;
+			}
+			&:nth-child(4), &:nth-child(5), &:nth-child(6) {
+				padding-bottom: 0;
+			}
+			&:nth-child(3n + 3) {
+				padding-right: 0;
+			}
+			&_tel {
+				position: relative;
+				&::before {
+					content: "";
+					position: absolute;
+					width: 200vw;
+					left: 50%;
+					bottom: 0;
+					border-bottom: mi.rem(1) solid var(--color-border-alfa);
+					transform: translateX(-50%);
+				}
+			}
+		}
+		@media (min-width: (config.$mbpM + 1px)) and (max-width: config.$mbpT) {
+			&_logo, &_cta, &_address, &_policy {
+				padding-left: 0;
+			}
+			&_nav, &_dev, &_email, &_tel {
+				padding-right: 0;
+			}
+			&_logo, &_tel {
+				padding-bottom: 0;
+			}
+			&_address, &_social, &_nav {
+				padding-bottom: 0;
+			}
+			&_tel, &_email, &_social, &_dev {
+				border-left: 1px solid var(--color-border-alfa);
+			}
+			&_email {
+				position: relative;
+				&::before {
+					content: "";
+					position: absolute;
+					width: 200vw;
+					left: 0;
+					bottom: 0;
+					border-bottom: 1px solid var(--color-border-alfa);
+					transform: translateX(-50%);
+				}
+			}
+		}
+		@media (min-width: (config.$mbpMM + 1px)) and (max-width: config.$mbpM) {
+			padding: 30px 0;
+			&_logo, &_cta, &_social, &_address {
+				border-bottom: 1px solid var(--color-border-alfa);
+			}
+			&_logo, &_cta {
+				padding-top: 0;
+			}
+			&_policy, &_dev, &_tel, &_email, &_nav {
+				padding-bottom: 0;
+			}
+			&_cta {
+				align-items: end;
+			}
+			&_dev, &_cta {
+				padding-left: 40px;
+			}
+		}
+		@media (max-width: config.$mbpMM) {
+			padding: 30px 0;
+			&_cta, &_social, &_address {
+				border-bottom: 1px solid var(--color-border-alfa);
+			}
+			&_logo, &_cta {
+				padding-top: 0;
+			}
+			&_policy, &_dev, &_tel, &_email, &_nav {
+				padding-bottom: 0;
+			}
+			&_dev {
+				padding-top: 15px;
+			}
+		}
+		&_logo {
+			grid-area: logo;
+			&:before {
+				right: 0;
+			}
+		}
+		&_email {
+			grid-area: email;
+			&:before {
+				left: 0;
+			}
+		}
+		&_tel {
+			grid-area: tel;
+		}
+		&_cta {
+			grid-area: cta;
+		}
+		&_social {
+			grid-area: social;
+		}
+		&_nav {
+			grid-area: nav;
+		}
+		&_address {
+			grid-area: address;
+		}
+		&_dev {
+			grid-area: dev;
+		}
+		&_policy {
+			grid-area: policy;
+		}
+		&_policy, &_dev {
+			--color: var(--color-text-inverse-muted);
+			opacity: 0.8;
+			justify-content: end;
+		}
+	}
+	&__request {
+		width: 100%;
+		justify-content: space-between;
+		max-width: mi.rem(320);
+		@media (max-width: config.$mbpM) {
+			max-width: 265px;
+		}
+		@media (max-width: config.$mbpMM) {
+			max-width: 256px;
+		}
+	}
+}
+.footer-block {
+	&__title {
+		color: var(--color-text-inverse-muted);
+		opacity: 0.8;
+		margin-bottom: mi.rem(20);
+		@media (max-width: config.$mbpM) {
+			margin-bottom: mi.rem(15);
+		}
+	}
+	&__body {
+		&_nav {
+			max-width: mi.rem(310);
+			@media (max-width: config.$mbpM) {
+				max-width:none;
+			}
+		}
+		&_address {
+			max-width: mi.rem(190);
+			@media (max-width: config.$mbpM) {
+				max-width:none;
+			}
+		}
+	}
+}

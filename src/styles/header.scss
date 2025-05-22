@@ -1,12 +1,25 @@
 @use "./config.scss" as config;
+@use "./mixins.scss" as mi;
 
 .burger-btn {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: var(--size, 32px);
-	height: var(--size, 32px);
+	width: var(--size, #{mi.rem(40)});
+	height: var(--size, #{mi.rem(40)});
+	background-color: var(--color-primary);
 	transition: none;
+	border-radius: 50%;
+	transition: background-color 0.3s;
+	@media (any-hover: hover) {
+		&:hover {
+			background-color: var(--color-primary-lvl-up);
+		}
+	}
+	&__label {
+		position: absolute;
+		font-size: 0;
+	}
 	&__inner {
 		position: relative;
 		display: inline-grid;
@@ -15,9 +28,9 @@
 		& > span {
 			display: block;
 			width: 100%;
-			height: 2px;
-			border-radius: 2px;
-			background-color: var(--color, currentColor);
+			height: 1px;
+			border-radius: 1px;
+			background-color: var(--color-text-alt, currentColor);
 			transition: transform 0.4s;
 			&:nth-child(2) {
 				transition-delay: 0.2s, 0s;
@@ -40,5 +53,187 @@
 				transform: rotate(180deg);
 			}
 		}
+	}
+}
+.header {
+	background-color: var(--color-sf-base);
+	border-bottom: mi.rem(1) solid var(--color-border);
+	&_second {
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: calc(100% - var(--scroll-compensation));
+		z-index: 1000;
+		transform: translateY(-100%);
+	}
+	html._initialized &_second {
+		transition: transform 0.3s;
+	}
+	&_second#{&}_show {
+		transform: translateY(0);
+	}
+	&__container {
+		display: grid;
+		grid-auto-flow: column;
+	}
+	&_prime &__container {
+		grid-template-columns: minmax(max-content, 14.58vw) minmax(max-content, 6.3fr) minmax(max-content, 2.46fr) minmax(max-content, 3.42fr);
+		@media (max-width: config.$mbpBR) {
+			grid-template-columns: auto 1fr auto auto;
+		}
+		@media (max-width: 680px) {
+			grid-template-columns: auto auto;
+			justify-content: space-between;
+		}
+	}
+	&_second &__container {
+		grid-template-columns: minmax(max-content, 14.58vw) minmax(max-content, 9.2fr) minmax(max-content, 2.3fr);
+		@media (max-width: config.$mbpBR) {
+			grid-template-columns: auto 1fr auto;
+		}
+	}
+	&__section {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: mi.rem(14) mi.rem(20);
+		&:first-child {
+			padding-left: 0;
+		}
+		&:last-child {
+			padding-right: 0;
+		}
+		@media (max-width: config.$mbpT) {
+			padding: mi.rem(14) mi.rem(18);
+		}
+	}
+	&_prime &__section {
+		@media (min-width: (config.$mbpBR + 1px)) {
+			&:not(&:nth-last-child(1), &:nth-last-child(2)) {
+				border-right: mi.rem(1) solid var(--color-border);
+			}
+		}
+		@media (min-width: 681px) and (max-width: config.$mbpBR) {
+			&:not(:last-child) {
+				border-right: mi.rem(1) solid var(--color-border);
+			}
+		}
+		@media (min-width: (config.$mbpMM + 1px)) and (max-width: 680px) {
+			&:first-child {
+				border-right: mi.rem(1) solid var(--color-border);
+			}
+		}
+	}
+	&_second &__section {
+		&:not(:last-child) {
+			@media (min-width: (config.$mbpT + 1px)) {
+				border-right: mi.rem(1) solid var(--color-border);
+			}
+		}
+		@media (min-width: (config.$mbpMM + 1px)) and (max-width: config.$mbpT) {
+			&:first-child {
+				border-right: mi.rem(1) solid var(--color-border);
+			}
+		}
+	}
+	&__logo {
+		--width: #{mi.rem(142)};
+		--height: #{mi.rem(34)};
+	}
+	&__section_logo {
+		justify-content: start;
+	}
+	
+	&_prime &__section_location {
+		@media (max-width: config.$mbpBR) {
+			justify-content: start;
+		}
+		@media (max-width: 680px) {
+			display: none;
+		}
+	}
+	&__section_contacts {
+		gap: mi.rem(44);
+		justify-content: end;
+		@media (max-width: config.$mbpT) {
+			gap: mi.rem(20);
+		}
+		@media (max-width: 860px) {
+			& > *:first-child {
+				display: none;
+			}
+		}
+	}
+	&_prime &__section_contacts {
+		@media (min-width: (config.$mbpBR + 1px)) {
+			padding-right: 0;
+		}
+		@media (max-width: 680px) {
+			display: none;
+		}
+	}
+	&_prime &__section_nav {
+		@media (max-width: config.$mbpBR) {
+			display: none;
+		}
+	}
+	&__nav {
+		@media (max-width: config.$mbpBR) {
+			display: none;
+		}
+	}
+	&_prime &__section_burger-btn {
+		padding-right: 0;
+		@media (min-width: (config.$mbpBR + 1px)) {
+			display: none;
+		}
+	}
+	&_second &__burger-btn {
+		flex: 0 0 auto;
+		margin-right: mi.rem(20);
+		@media (max-width: config.$mbpMM) {
+			margin-right: 0;
+		}
+		@media (min-width: (config.$mbpBR + 1px)) {
+			display: none;
+		}
+	}
+	&_second &__request {
+		min-width: mi.rem(212);
+		@media (max-width: config.$mbpMM) {
+			display: none;
+		}
+	}
+}
+.contacts {
+	&_burger-panel {
+		display: grid;
+		gap: mi.rem(15);
+	}
+}
+.burger-panel {
+	display: grid;
+	justify-items: start;
+	grid-template-rows: auto 1fr auto auto auto;
+	background-color: var(--color-sf-base);
+	padding: mi.rem(30);
+	overflow: auto;
+	&__nav {
+		align-self: start;
+		margin-bottom: mi.rem(30);
+	}
+	&__logo {
+		--width: #{mi.rem(142)};
+		--height: #{mi.rem(33)};
+		margin-bottom: mi.rem(20);
+	}
+	&__location {
+		margin-bottom: mi.rem(15);
+	}
+	&__contacts {
+		margin-bottom: mi.rem(20);
+	}
+	&__request {
+		justify-self: stretch;
 	}
 }

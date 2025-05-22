@@ -1,0 +1,25 @@
+---
+import Breadcrumbs from 'src/components/Breadcrumbs.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="CoffeOn" description="Политика в отношении обработки персональных данных">
+	<div class="article article_policy section-space-top-small section-space-bottom">
+		<div class="container article__container">
+			<Breadcrumbs className='article__breadcrumbs' current='Политика конфиденциальности'/>
+			<h1 class="article__title">Политика в отношении обработки персональных данных</h1>
+			<!-- <div class="article__poster ratio-wrap">
+				<img src="img/article.jpg" alt="Article poster" class="ratio-wrap__item">
+			</div> -->
+			<div class="article__body">
+				<div class="article__col">
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta impedit magnam minima corporis obcaecati odio quod non dolorem eveniet veniam aspernatur deleniti nesciunt dicta consequuntur eius, cupiditate ea est maiores.</p>
+				</div>
+			</div>
+			<a href="/" class="article__return btn btn_rect btn_lg btn_primary">
+				<span class="btn__label tg-text-normal">Вернуться на главную</span>
+				<span class="btn__icon icon-arrow-right"></span>
+			</a>
+		</div>
+	</div>
+</Layout>

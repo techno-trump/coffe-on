@@ -1,0 +1,75 @@
+@use "./mixins.scss" as mi;
+@use "./config.scss" as config;
+
+.stats {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-auto-flow: column;
+	gap: mi.rem(20);
+	@media (max-width: config.$mbpT) {
+		grid-template-columns: repeat(2, 1fr);
+		grid-auto-flow: row;
+	}
+	@media (max-width: config.$mbpM) {
+		grid-template-columns: 100%;
+	}
+	& > *:first-child, & > *:last-child {
+		@media (min-width: (config.$mbpT + 1px)) {
+			grid-template-rows: repeat(2, 1fr);
+			grid-row: 1/span 2;
+		}
+		@media (max-width: config.$mbpM) {
+			min-height: 280px;
+		}
+		@media (max-width: config.$mbpMM) {
+			min-height: 345px;
+		}
+	}
+}
+.stats-item {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: mi.rem(50);
+	padding: mi.rem(30);
+	background-color: var(--color-sf-muted);
+	border-radius: mi.rem(20);
+	overflow: hidden;
+	
+	&_highlight {
+		background-color: var(--color-primary);
+	}
+	&_metric {
+		position: relative;
+		z-index: 0;
+	}
+	&__number {
+		font-weight: 600;
+		font-size: mi.rem(55);
+		line-height: 1.1;
+		letter-spacing: -0.04em;
+		@media (max-width: config.$mbpM) {
+			font-size: 60px;
+		}
+	}
+	&_metric:not(&_highlight) &__note {
+		color: var(--color-text-base-muted);
+	}
+	&__number-unit {
+		margin-left: 0.2em;
+		font-size: 0.5em;
+		letter-spacing: -0.04em;
+		@media (max-width: config.$mbpM) {
+			font-size: 0.35em;
+		}
+	}
+	&__bg {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		z-index: -1;
+	}
+}

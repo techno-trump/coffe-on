@@ -1,0 +1,62 @@
+@use "./config.scss" as config;
+@use "./mixins.scss" as mi;
+
+.article {
+	background-color: var(--color-sf-muted);
+	&__poster {
+		--ratio: 48%;
+	}
+	&__breadcrumbs {
+		margin-bottom: mi.rem(40);
+		@media (max-width: config.$mbpM) {
+			margin-bottom: mi.rem(30);
+		}
+	}
+	&__title {
+		margin-bottom: mi.rem(20);
+		@media (max-width: config.$mbpM) {
+			margin-bottom: mi.rem(15);
+		}
+	}
+	&__body {
+		p {
+			color: var(--color-text-base-muted);
+		}
+	}
+	&__col {
+		max-width: mi.rem(920);
+	}
+	&_policy &__body {
+		margin-bottom: mi.rem(20);
+		@media (max-width: config.$mbpM) {
+			margin-bottom: mi.rem(15);
+		}
+	}
+	&__poster {
+		margin-bottom: mi.rem(20);
+	}
+	&_news &__body {
+		display: grid;
+		grid-template-columns: 4.4fr 9fr;
+		gap: mi.rem(20);
+		@media (max-width: config.$mbpM) {
+			grid-template-columns: 1fr;
+		}
+	}
+	&__request {
+		@media (max-width: config.$mbpM) {
+			display: none;
+		}
+	}
+	&__body_wide {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: mi.rem(20) mi.rem(30);
+		@media (max-width: config.$mbpT) {
+			grid-template-columns: 1fr;
+		}
+	}
+	&__return {
+		max-width: mi.rem(380);
+	}
+}

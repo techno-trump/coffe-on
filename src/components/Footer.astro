@@ -1,7 +1,77 @@
 ---
+import Logo from "./Logo.astro";
+import MainNav from "./MainNav.astro";
+import Social from "./Social.astro";
+
+const menuItems = [
+	{ label: "Аппараты", href: "/#devices" },
+	{ label: "Установка", href: "/#instalation" },
+	{ label: "О компании", href: "/#about" },
+	{ label: "Отзывы", href: "/#testimonials" },
+	{ label: "Новости", href: "/#news" },
+	{ label: "FAQ", href: "/#faq" },
+];
+
 // const portalHost = import.meta.env.ASTRO_APP_CABINET_HOST;
 ---
 
-<footer class="footer section-space">
-	
+<footer class="footer tg-text-mini">
+	<div class="container footer__container">
+		<div class="footer__section footer__section_logo">
+			<Logo className="footer__logo" style="light"></Logo>
+			<div class="footer__logo-desc tg-caption">Вендинговая компания</div>
+		</div>
+		<div class="footer__section footer__section_tel">
+			<div class="footer-block">
+				<div class="footer-block__title">Телефон</div>
+				<div class="footer-block__body tg-h2">
+					<a href="tel:+70000000000" class="btn btn_link"><span class="btn__label">+ 7 (000) 000-00-00</span></a>
+				</div>
+			</div>
+		</div>
+		<div class="footer__section footer__section_email">
+			<div class="footer-block">
+				<div class="footer-block__title">Почта</div>
+				<div class="footer-block__body tg-h2">
+					<a href="mailto:coffeeon@coffee-on.ru" class="btn btn_link"><span class="btn__label">coffeeon@coffee-on.ru</span></a>
+				</div>
+			</div>
+		</div>
+		<div class="footer__section footer__section_cta">
+			<button type="button" class="footer__request btn btn_rect btn_md btn_primary tg-caption">
+				<span class="btn__label">Заказать установку</span>
+				<span class="btn__icon icon-arrow-right"></span>
+			</button>
+		</div>
+		<div class="footer__section footer__section_nav">
+			<div class="footer-block">
+				<div class="footer-block__title">Навигация</div>
+				<div class="footer-block__body footer-block__body_nav  tg-text-normal">
+					<MainNav items={menuItems} context="footer"/>
+				</div>
+			</div>
+		</div>
+		<div class="footer__section footer__section_social">
+			<div class="footer-block">
+				<div class="footer-block__title">Соцсети и мессенджеры:</div>
+				<div class="footer-block__body">
+					<Social mode="inverse" size="lg"/>
+				</div>
+			</div>
+		</div>
+		<div class="footer__section footer__section_policy tg-caption">
+			<a href="#" class="btn btn_link"><span class="btn__label">Политика конфиденциальности</span></a>
+		</div>
+		<div class="footer__section footer__section_address">
+			<div class="footer-block">
+				<div class="footer-block__title">Адрес</div>
+				<div class="footer-block__body footer-block__body_address tg-text-normal">
+					<a href="#" class="btn btn_link footer__address">г.Москва, ул. Горбунова, д. 2, стр. 45</a>
+				</div>
+			</div>
+		</div>
+		<div class="footer__section footer__section_dev tg-caption">
+			<a href="#" class="btn btn_link"><span class="btn__label">Разработка сайта</span></a>
+		</div>
+	</div>
 </footer>

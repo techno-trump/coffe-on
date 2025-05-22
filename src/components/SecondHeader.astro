@@ -1,0 +1,39 @@
+---
+import MainNav from "./MainNav.astro";
+import Logo from "./Logo.astro";
+import Location from "./Location.astro";
+
+const menuItems = [
+	{ label: "Аппараты", href: "/#devices" },
+	{ label: "Установка", href: "/#instalation" },
+	{ label: "О компании", href: "/#about" },
+	{ label: "Отзывы", href: "/#testimonials" },
+	{ label: "Новости", href: "/#testimonials" },
+	{ label: "FAQ", href: "/#faq" },
+	{ label: "Контакты", href: "/#contacts" },
+];
+//const portalHost = import.meta.env.ASTRO_APP_CABINET_HOST;
+---
+
+<header id="header" class="header header_second tg-text-mini">
+	<div class="container header__container">
+		<div class="header__section header__section_logo">
+			<Logo className="header__logo" />
+		</div>
+		<div class="header__section header__section_nav">
+			<MainNav items={menuItems} className="header__nav"></MainNav>
+		</div>
+		<div class="header__section header__section_actions">
+			<button class="burger-btn header__burger-btn" data-drawer-toggle="burger-panel">
+				<span class="burger-btn__inner">
+					<span></span><span></span><span></span>
+					<div class="burger-btn__label">Показать бургер меню</div>
+				</span>
+			</button>
+			<button type="button" class="header__request btn btn_rect btn_sm btn_primary tg-caption">
+				<span class="btn__label">Заказать установку</span>
+				<span class="btn__icon icon-arrow-right"></span>
+			</button>
+		</div>
+	</div>
+</header>

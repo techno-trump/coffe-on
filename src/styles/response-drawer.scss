@@ -1,0 +1,16 @@
+@use "./mixins.scss" as mi;
+@use "./config.scss" as config;
+
+.response-drawer {
+	&__body {
+		display: grid;
+		gap: mi.rem(20);
+		color: var(--color-text-inverse);
+	}
+	&__contacts {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: mi.rem(10);
+	}
+}

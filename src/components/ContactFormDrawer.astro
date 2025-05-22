@@ -1,0 +1,30 @@
+<div class="drawer drawer_primary drawer_center contact-form-drawer" data-drawer="contact-form">
+	<div class="drawer__close-btn drawer__close-btn_mob" data-drawer-close="contact-form"></div>
+	<div class="drawer__panel drawer__panel" data-elem="drawer.panel">
+		<div class="drawer__header">
+			<div class="drawer__title tg-h2">Заполните форму, и наш менеджер с вами свяжется</div>
+			<div class="drawer__close-btn drawer__close-btn_desc" data-drawer-close="contact-form"></div>
+		</div>
+		<div class="drawer__body contact-form-drawer__body">
+			<input class="form-input" name="full-name" type="text" required placeholder="Имя*">
+			<input class="form-input" name="tel" type="text" required  data-component=":tel-input:">
+			<select class="form-select" name="location-type" data-component=":select:">
+				<option value="" disabled selected>Тип помещения</option>
+				<option value="Торговый центр">Торговый центр</option>
+				<option value="Минимаркет">Минимаркет</option>
+			</select>
+			<label class="form-checkbox">
+				<span class="cm-checkbox form-checkbox__input">
+					<input type="checkbox" class="cm-checkbox__input" />
+					<span class="cm-checkbox__body icon-checkbox"></span>
+					<span class="cm-checkbox__body cm-checkbox__body_checked icon-checkbox-checked"></span>
+				</span>
+				<span class="form-checkbox__label tg-caption">Я согласен с <a href="#" class="link underline">политикой конфиденциальности</a></span>
+			</label>
+			<button type="button" class="contact-form-drawer__submit btn btn_rect btn_lg btn_primary">
+				<span class="btn__label">Оставить заявку</span>
+				<span class="btn__icon icon-arrow-right"></span>
+			</button>
+		</div>
+	</div>
+</div>

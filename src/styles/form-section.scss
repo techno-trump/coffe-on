@@ -1,0 +1,119 @@
+@use "./config.scss" as config;
+@use "./mixins.scss" as mi;
+
+.form-section {
+	&_primary {
+		--autofill-color: var(--color-text-inverse);
+		color: var(--color-text-inverse);
+		background-color: var(--color-sf-alt);
+	}
+	&_secondary {
+		--link-hover-color: var(--color-sf-alt);
+		--placeholder-color: var(--color-text-base-muted);
+		--label-color: var(--color-text-base-muted);
+		--checbox-color: var(--color-sf-alt);
+		background-color: var(--color-sf-muted);
+	}
+	&_divided &__container {
+		display: grid;
+		gap: mi.rem(20);
+		grid-template-columns: 1fr 1fr;
+		@media (max-width: config.$mbpT) {
+			grid-template-columns: 1fr;
+		}
+	}
+	&__header {
+		margin-bottom: mi.rem(40);
+	}
+	&_divided &__header {
+		@media (max-width: config.$mbpT) {
+			margin-bottom: 0;
+		}
+	}
+	&__title {
+		margin-bottom: mi.rem(15);
+		max-width: mi.rem(600);
+	}
+	&__note {
+		font-weight: 400;
+		opacity: 0.8;
+	}
+	&_secondary &__note {
+		color: var(--color-text-base-muted);
+	}
+	&__form {
+		display: grid;
+	}
+	&_divided &__form {
+		grid-template-columns: 1fr 1fr;
+		gap: mi.rem(20);
+		@media (max-width: config.$mbpMM) {
+			grid-template-columns: 1fr;
+		}
+	}
+	&__field {
+		&_lg {
+			grid-column: 1/ -1;
+		}
+	}
+	&_horizontal &__form {
+		grid-template-columns: repeat(3, 1fr) 1.24fr;
+		gap: mi.rem(10) mi.rem(20);
+		@media (max-width: config.$mbpT) {
+			grid-template-columns: 1fr 1fr;
+		}
+		@media (max-width: config.$mbpMM) {
+			grid-template-columns: 1fr;
+			gap: 20px;
+		}
+	}
+	&_horizontal &__submit {
+		grid-row: 1/span 1;
+		grid-column: 4 /span 1;
+		@media (max-width: config.$mbpT) {
+			grid-row: 2/span 1;
+			grid-column: 2 /span 1;
+		}
+		@media (max-width: config.$mbpMM) {
+			grid-column: 1/span 1;
+			grid-row: auto/ span 1;
+			max-width: 280px;
+		}
+	}
+
+	&__agreement {
+		margin-top: mi.rem(10);
+	}
+	&_divided &__submit {
+		grid-column: 1/ -1;
+		max-width: mi.rem(380);
+		@media (max-width: config.$mbpM) {
+			max-width: mi.rem(280);
+		}
+	}
+}
+.form-input, .form-select {
+	flex: 1 1 auto;
+	color: inherit;
+	min-width: 0;
+	width: 100%;
+	border-bottom: mi.rem(1) solid var(--color-border);
+	min-height: mi.rem(70);
+	background-color: transparent;
+	&::placeholder {
+		color: var(--placeholder-color, var(--color-text-inverse-muted-alfa));
+	}
+}
+textarea {
+	resize: vertical;
+}
+.form-checkbox {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.6em;
+	&__label {
+		color: var(--label-color, var(--color-text-inverse-muted));
+		cursor: pointer;
+	}
+}
+

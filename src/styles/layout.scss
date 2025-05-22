@@ -1,4 +1,6 @@
+@use "./mixins.scss" as mi;
 @use "./config.scss" as config;
+
 :root {
 	--section-space: 50px;
 	@media (max-width: config.$mbpT) {
@@ -31,18 +33,16 @@ body {
 	display: flex;
 	flex-direction: column;
 	min-height: 100%;
+	background-color: var(--color-sf-base);
+}
+.scroll-lock-by-drawer body {
+	overflow: hidden;
 }
 body main {
 	flex: 1 1 auto;
 }
 .container {
-	width: 100%;
-	margin: auto;
-	padding-left: var(--container-save-space);
-	padding-right: var(--container-save-space);
-	&_wide {
-		max-width: 1440px;
-	}
+	margin: 0 var(--container-save-space);
 }
 
 .flex-even {
@@ -57,5 +57,80 @@ body main {
 		flex: 0 0 var(--item-flex-basis);
 		padding-left: var(--row-gap, var(--gap, 0));
 		padding-top: var(--column-gap, var(--gap, 0));
+	}
+}
+.section-space-top-big, .section-space-big {
+	padding-top: mi.rem(120);
+	@media (max-width: config.$mbpT) {
+		padding-top: 110px;
+	}
+	@media (max-width: config.$mbpM) {
+		padding-top: 100px;
+	}
+}
+.section-space-bottom-big, .section-space-big {
+	padding-bottom: mi.rem(120);
+	@media (max-width: config.$mbpT) {
+		padding-bottom: 110px;
+	}
+	@media (max-width: config.$mbpM) {
+		padding-bottom: 100px;
+	}
+}
+.section-space-top-small, .section-space-small {
+	padding-top: mi.rem(40);
+	@media (max-width: config.$mbpT) {
+		padding-top: 30px;
+	}
+	@media (max-width: config.$mbpM) {
+		padding-top: 25px;
+	}
+}
+.section-space-bottom-small, .section-space-small {
+	padding-bottom: mi.rem(40);
+	@media (max-width: config.$mbpT) {
+		padding-bottom: 30px;
+	}
+	@media (max-width: config.$mbpM) {
+		padding-bottom: 25px;
+	}
+}
+.section-space-top, .section-space {
+	padding-top: mi.rem(80);
+	@media (max-width: config.$mbpT) {
+		padding-top: 60px;
+	}
+	@media (max-width: config.$mbpM) {
+		padding-top: 50px;
+	}
+}
+.section-space-bottom, .section-space {
+	padding-bottom: mi.rem(80);
+	@media (max-width: config.$mbpT) {
+		padding-bottom: 60px;
+	}
+	@media (max-width: config.$mbpM) {
+		padding-bottom: 50px;
+	}
+}
+.section {
+	&__title {
+		color: var(--color-text-alt);
+		margin-bottom: mi.rem(20);
+		
+		@media (max-width: config.$mbpMM) {
+			margin-bottom: 15px;
+		}
+	}
+	&__desc {
+		max-width: mi.rem(760);
+	}
+	&__header {
+		&:not(:last-child) {
+			margin-bottom: mi.rem(40);
+			@media (max-width: config.$mbpMM) {
+				margin-bottom: 20px;
+			}
+		}
 	}
 }

@@ -1,0 +1,51 @@
+@use "./mixins.scss" as mi;
+@use "./config.scss" as config;
+
+.cases-slider-section {
+	overflow: hidden;
+	position: relative;
+	&__slider {
+	}
+	&__wrapper {
+		display: flex;
+	}
+	&__slide {
+		flex: 0 0 auto;
+		border-radius: mi.rem(20);
+		overflow: hidden;
+		&_thin {
+			--ratio: 113.6363%;
+			width: mi.rem(440);
+			@media (max-width: config.$mbpM) {
+				width: mi.rem(276);
+			}
+		}
+		&_wide {
+			--ratio: 74.6268%;
+			width: mi.rem(670);
+			@media (max-width: config.$mbpM) {
+				width: mi.rem(450);
+			}
+		}
+	}
+	&__cursor {
+		pointer-events: none;
+		position: fixed;
+		left: 0;
+		top: 0;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		justify-items: center;
+		align-items: center;
+		width: mi.rem(100);
+		height: mi.rem(100);
+		background-color: var(--color-primary);
+		border-radius: 50%;
+		font-size: mi.rem(12);
+		color: var(--color-text-alt);
+		transform: scale(0);
+	}
+	&:hover &__cursor {
+		transform: scale(1);
+	}
+}

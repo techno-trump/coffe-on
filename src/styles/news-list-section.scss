@@ -1,0 +1,57 @@
+@use "./config.scss" as config;
+@use "./mixins.scss" as mi;
+
+.news-list-section {
+	overflow: hidden;
+		&__header {
+			display: flex;
+			justify-content: space-between;
+			gap: mi.rem(20);
+			margin-bottom: mi.rem(60);
+			@media (max-width: config.$mbpM) {
+				flex-direction: column;
+				margin-bottom: mi.rem(40);
+			}
+			@media (max-width: config.$mbpMM) {
+				flex-direction: column;
+				margin-bottom: mi.rem(20);
+			}
+		}
+		&__actions {
+			display: flex;
+			gap: mi.rem(10);
+			--icon-color: var(--color-text-alt);
+			--border-color: var(--color-text-alt);
+		}
+		&__wrapper {
+			display: flex;
+		}
+		&__slide {
+			display: grid;
+			flex: 0 0 auto;
+			width: calc(100% / 3);
+			border: mi.rem(1) solid var(--color-border);
+			padding: 0 mi.rem(20);
+			border-top: none;
+			border-bottom: none;
+			cursor: grab;
+		}
+}
+.news-list-card {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	&__view {
+		--ratio: 96.42%;
+		margin-bottom: mi.rem(15);
+		width: 100%;
+	}
+	&__title {
+		margin-bottom: mi.rem(80);
+	}
+	&__link {
+		--color: var(--color-text-alt);
+		--hover-color: var(--color-primary);
+		align-self: start;
+	}
+}

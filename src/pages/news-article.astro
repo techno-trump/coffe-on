@@ -1,0 +1,70 @@
+---
+import Breadcrumbs from 'src/components/Breadcrumbs.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="CoffeOn" description="Как кофейные автоматы помогают HR удерживать сотрудников?">
+	<div class="article article_news section-space-top-small section-space-bottom">
+		<div class="container article__container">
+			<Breadcrumbs className='article__breadcrumbs' current='Как кофейные автоматы помогают HR удерживать сотрудников?'/>
+			<h1 class="article__title">Как кофейные автоматы помогают HR удерживать сотрудников?</h1>
+			<div class="article__poster ratio-wrap ratio-wrap_cover">
+				<img src="img/article.jpg" alt="Article poster" class="ratio-wrap__item">
+			</div>
+			<div class="article__body">
+				<div class="article__aside">
+					<a href="/" class="article__request btn btn_rect btn_lg btn_primary">
+						<span class="btn__label tg-text-normal">Заказать установку</span>
+						<span class="btn__icon icon-arrow-right"></span>
+					</a>
+				</div>
+				<div class="article__col">
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta impedit magnam minima corporis obcaecati odio quod non dolorem eveniet veniam aspernatur deleniti nesciunt dicta consequuntur eius, cupiditate ea est maiores.</p>
+				</div
+			</div>
+			</div>
+		</div>
+	</div>
+	<section class="section-space news-list-section" data-component=":news-slider:">
+		<div class="container news-list-section__container">
+			<div class="news-list-section__header">
+				<div class="news-list-section__title tg-h2">Смотрите еще</div>
+				<div class="news-list-section__actions">
+					<button type="button" class="slider-nav-btn" data-elem="news-slider.prev">
+						<div class="slider-nav-btn__icon icon-arrow-left"></div>
+						<div class="slider-nav-btn__label">К предидущему слайду</div>
+					</button>
+					<button type="button" class="slider-nav-btn" data-elem="news-slider.next">
+						<div class="slider-nav-btn__icon icon-arrow-right"></div>
+						<div class="slider-nav-btn__label">К следующему слайду</div>
+					</button>
+				</div>
+			</div>
+			<div class="news-list-section__body" data-elem="news-slider.slider">
+				<div class="news-list-section__wrapper">
+					{
+						[
+							{ imgSrc: "01.jpg", title: "Как кофейные автоматы помогают HR удерживать сотрудников?" },
+							{ imgSrc: "02.jpg", title: "5 преимуществ установки кофейных автоматов в офисах " },
+							{ imgSrc: "03.jpg", title: "Кофеварка VS Вендинговый автомат" },
+							{ imgSrc: "04.jpg", title: "Как кофейные автоматы поддерживают комфорт пациентов и персонала?" }
+						].map(({ imgSrc, title }) => <div class="news-list-section__slide">
+																		<div class="news-list-card">
+																			<div class="news-list-card__top">
+																				<div class=`ratio-wrap ratio-wrap_cover news-list-card__view`>
+																					<img src={`img/news/${imgSrc}`} alt={imgSrc} class="ratio-wrap__item" />
+																				</div>
+																				<div class="news-list-card__title tg-text-big">{title}</div>
+																			</div>
+																			<a href="#" class="news-list-card__link link">
+																				<div class="link__label">Подробнее</div>
+																				<div class="link__icon icon-arrow-right"></div>
+																			</a>
+																		</div>
+																	</div>)
+					}
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>

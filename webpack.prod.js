@@ -9,7 +9,7 @@ const config = {
 	entry: './src/scripts/index.js',
 	output: {
     path: path.resolve(__dirname, 'dist/assets'), // Папка для выходных файлов
-				publicPath: `/assets/`,
+				publicPath: `auto`,
 				filename: '[name].js', // Файл выхода
   },
 	optimization: {

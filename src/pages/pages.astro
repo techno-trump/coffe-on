@@ -1,0 +1,37 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Boilerplate" description="Index page" empty={true}>
+	<div class="container">
+		<div class="block">
+			<h3>Pages</h3>
+			<ol>
+				<li><a href="./index.html" class="link">Home</a></li>
+				<li><a href="./404.html" class="link">404</a></li>
+				<li><a href="./policy.html" class="link">Policy</a></li>
+				<li><a href="./news-article.html" class="link">News article</a></li>
+			</ol>
+		</div>
+		<div class="block">
+			<h3>Popups</h3>
+			<ol>
+				<li><button type="button" onclick="app.drawers.open('contact-form')">Contact form</button></li>
+				<li><button type="button" onclick="app.drawers.open('coockies-agreement')">Coockies agreement</button></li>
+				<li><button type="button" onclick="app.drawers.open('exception-drawer')">Exception drawer</button></li>
+				<li><button type="button" onclick="app.drawers.open('thanks-drawer')">Thanks drawer</button></li>
+			</ol>
+		</div>
+	</div>
+</Layout>
+<style>
+	.container {
+		display: grid;
+		gap: 40px;
+		padding: 40px;
+	}
+	h3 {
+		font-weight: 600;
+		margin-bottom: 20px;
+	}
+</style>

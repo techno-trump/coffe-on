@@ -1,0 +1,66 @@
+@use "./mixins.scss" as mi;
+@use "./config.scss" as config;
+
+.installation-steps {
+	counter-reset: card-number;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: mi.rem(20);
+	@media (max-width: config.$mbpT) {
+		grid-template-columns: 100%;
+	}
+}
+.installation-step-card {
+	counter-increment: card-number;
+	padding: mi.rem(40);
+	padding-right: mi.rem(60);
+	background-color: var(--color-sf-muted);
+  clip-path: polygon(calc(100% - 68.566px) 0px, calc(100% - 68.566px) 0px, calc(100% - 65.900363px) 0.17495098px, calc(100% - 63.327624px) 0.68658704px, calc(100% - 60.874141px) 1.51508286px, calc(100% - 58.566272px) 2.64061312px, calc(100% - 56.430375px) 4.0433525px, calc(100% - 54.492808px) 5.70347568px, calc(100% - 52.779929px) 7.60115734px, calc(100% - 51.318096px) 9.71657216px, calc(100% - 50.133667px) 12.02989482px, calc(100% - 49.253px) 14.5213px, calc(100% - 0.72300000000001px) calc(50% - 1.445px), calc(100% - 0.72300000000001px) calc(50% - 1.445px), calc(100% - 0.45794599999999px) calc(50% - 0.38371099999998px), calc(100% - 0.2531679999999px) calc(50% - -0.68711200000004px), calc(100% - 0.10864200000003px) calc(50% - -1.765003px), calc(100% - 0.024343999999928px) calc(50% - -2.847496px), calc(100% - 0.00024999999999409px) calc(50% - -3.932125px), calc(100% - 0.036336000000006px) calc(50% - -5.016424px), calc(100% - 0.13257800000002px) calc(50% - -6.097927px), calc(100% - 0.28895199999988px) calc(50% - -7.174168px), calc(100% - 0.50543399999992px) calc(50% - -8.242681px), calc(100% - 0.78199999999998px) calc(50% - -9.301px), calc(100% - 49.141px) calc(100% - 14.314px), calc(100% - 49.141px) calc(100% - 14.314px), calc(100% - 50.039455px) calc(100% - 11.85354px), calc(100% - 51.235px) calc(100% - 9.5705599999999px), calc(100% - 52.701805px) calc(100% - 7.48426px), calc(100% - 54.41404px) calc(100% - 5.6138400000001px), calc(100% - 56.345875px) calc(100% - 3.9785000000001px), calc(100% - 58.47148px) calc(100% - 2.5974400000001px), calc(100% - 60.765025px) calc(100% - 1.48986px), calc(100% - 63.20068px) calc(100% - 0.67495999999994px), calc(100% - 65.752615px) calc(100% - 0.17193999999995px), calc(100% - 68.395px) calc(100% - 5.6843418860808E-14px), 20.0355px calc(100% - 0px), 20.0355px calc(100% - 0px), 16.78564053px calc(100% - 0.25903799999992px), 13.70273664px calc(100% - 1.0089839999999px), 10.82803911px calc(100% - 2.209086px), 8.20279872px calc(100% - 3.818592px), 5.86826625px calc(100% - 5.79675px), 3.86569248px calc(100% - 8.102808px), 2.23632819px calc(100% - 10.696014px), 1.02142416px calc(100% - 13.535616px), 0.26223117px calc(100% - 16.580862px), 3.3169912409168E-31px calc(100% - 19.791px), 0px 19.7911px, 0px 19.7911px, 0.26223171px 16.58088387px, 1.02142608px 13.53558656px, 2.23633197px 10.69595569px, 3.86569824px 8.10273888px, 5.86827375px 5.79668375px, 8.20280736px 3.81853792px, 10.82804793px 2.20904901px, 13.70274432px 1.00896464px, 16.78564539px 0.25903243px, 20.0355px 3.27653007205E-31px, calc(100% - 68.566px) 0px);
+	@media (max-width: config.$mbpNB) {
+		padding: 30px;
+		padding-right: 60px;
+	}
+	@media (max-width: config.$mbpT) {
+		padding: 40px 40px 90px;
+		clip-path: polygon(calc(100% - 0px) calc(100% - 53.294px), calc(100% - 0px) calc(100% - 53.294px), calc(100% - 0.17495499999995px) calc(100% - 51.222075px), calc(100% - 0.68659999999988px) calc(100% - 49.22236px), calc(100% - 1.515105px) calc(100% - 47.315345px), calc(100% - 2.64064px) calc(100% - 45.52152px), calc(100% - 4.043375px) calc(100% - 43.861375px), calc(100% - 5.70348px) calc(100% - 42.3554px), calc(100% - 7.601125px) calc(100% - 41.024085px), calc(100% - 9.71648px) calc(100% - 39.88792px), calc(100% - 12.029715px) calc(100% - 38.967395px), calc(100% - 14.521px) calc(100% - 38.283px), calc(50% - -1.445px) calc(100% - 0.56200000000001px), calc(50% - -1.445px) calc(100% - 0.56200000000001px), calc(50% - -0.38371100000003px) calc(100% - 0.35592800000001px), calc(50% - 0.68711199999996px) calc(100% - 0.1967039999999px), calc(50% - 1.765003px) calc(100% - 0.084316000000001px), calc(50% - 2.847496px) calc(100% - 0.018752000000006px), calc(50% - 3.932125px) calc(100% - 0px), calc(50% - 5.016424px) calc(100% - 0.028048000000013px), calc(50% - 6.097927px) calc(100% - 0.10288399999996px), calc(50% - 7.174168px) calc(100% - 0.22449600000004px), calc(50% - 8.242681px) calc(100% - 0.39287199999995px), calc(50% - 9.301px) calc(100% - 0.60800000000006px), 14.3145px calc(100% - 38.196px), 14.3145px calc(100% - 38.196px), 11.85387534px calc(100% - 38.894416px), 9.57076992px calc(100% - 39.823688px), 7.48437858px calc(100% - 40.963752px), 5.61389616px calc(100% - 42.294544px), 3.9785175px calc(100% - 43.796px), 2.59743744px calc(100% - 45.448056px), 1.48985082px calc(100% - 47.230648px), 0.67495248px calc(100% - 49.123712px), 0.17193726px calc(100% - 51.107184px), 2.158722797518E-31px calc(100% - 53.161px), 0px 15.5731px, 0px 15.5731px, 0.2590327px 13.0470588px, 1.0089656px 10.6507904px, 2.2090509px 8.4163576px, 3.8185408px 6.3758232px, 5.7966875px 4.56125px, 8.1027432px 3.0047008px, 10.6959601px 1.7382384px, 13.5355904px 0.7939256px, 16.5808863px 0.2038252px, 19.7911px 2.5782069794402E-31px, calc(100% - 19.791px) 0px, calc(100% - 19.791px) 0px, calc(100% - 16.580862px) 0.20382574px, calc(100% - 13.535616px) 0.79392752px, calc(100% - 10.696014px) 1.73824218px, calc(100% - 8.102808px) 3.00470656px, calc(100% - 5.79675px) 4.5612575px, calc(100% - 3.818592px) 6.37583184px, calc(100% - 2.209086px) 8.41636642px, calc(100% - 1.0089839999999px) 10.65079808px, calc(100% - 0.25903799999998px) 13.04706366px, calc(100% - 5.6843418860808E-14px) 15.5731px, calc(100% - 0px) calc(100% - 53.294px));
+	}
+	@media (max-width: config.$mbpMM) {
+		padding: 30px 30px 90px;
+		
+	}
+	@media (max-width: config.$mbpM) {
+		flex-direction: column;
+		gap: 0px;
+	}
+	&__number {
+		flex: 0 0 auto;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border: mi.rem(1) solid var(--color-sf-alt);
+		color: var(--color-sf-alt);
+		width: mi.rem(66);
+		height: mi.rem(66);
+		border-radius: 50%;
+		margin-bottom: mi.rem(100);
+		@media (max-width: config.$mbpMM) {
+			margin-bottom: 50px;
+		}
+		&::before {
+			content: "0" counter(card-number);
+		}
+	}
+	&__title {
+		margin-bottom: mi.rem(15);
+		@media (min-width: (config.$mbpT + 1px)) {
+			min-height: 2.45em;
+			max-width: mi.rem(260);
+		}
+	}
+	&__desc {
+		color: var(--color-text-base-muted);
+		@media (min-width: (config.$mbpT + 1px)) {
+			max-width: mi.rem(260);
+		}
+	}
+}

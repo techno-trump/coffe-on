@@ -1,0 +1,67 @@
+@use "./mixins.scss" as mi;
+@use "./config.scss" as config;
+
+.faq-section {
+	&__title {
+		margin-bottom: mi.rem(60);
+	}
+}
+.faq-item {
+	&__header {
+		display: flex;
+		gap: mi.rem(30);
+		align-items: center;
+		justify-content: space-between;
+		padding: mi.rem(20) 0;
+		cursor: pointer;
+	}
+	&__state {
+		flex: 0 0 auto;
+		display: grid;
+		align-items: center;
+		justify-content: center;
+		width: mi.rem(45);
+		height: mi.rem(45);
+		border-radius: 50%;
+		border: mi.rem(1) solid var(--border-color, var(--color-text-alt));
+		background-color: var(--bg-color, transparent);
+		transition: border-color 0.3s, background-color 0.3s, transform 0.3s;
+		@media (max-width: config.$mbpM) {
+			width: mi.rem(30);
+			height: mi.rem(30);
+		}
+		&::before, &::after {
+			content: "";
+			height: mi.rem(1);
+			width: mi.rem(17);
+			grid-row: 1/span 1;
+			grid-column: 1/span 1;
+			background-color: var(--cross-color, var(--color-text-alt));
+			transition: background-color 0.3s;
+			@media (max-width: config.$mbpM) {
+				width: mi.rem(11);
+			}
+		}
+		&::before {
+		}
+		&::after {
+			transform: rotateZ(90deg);
+		}
+	}
+	@media (any-hover: hover) {
+		&__header:hover &__state {
+			--bg-color: var(--color-primary);
+			--border-color: var(--color-primary);
+		}
+	}
+	&__header._active &__state {
+		transform: rotate(45deg);
+	}
+	&__answer {
+		color: var(--color-text-base-muted);
+		padding: mi.rem(20) 0;
+	}
+	&__body {
+		border-bottom: mi.rem(1) solid var(--color-border);
+	}
+}

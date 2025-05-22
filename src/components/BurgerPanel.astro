@@ -1,0 +1,31 @@
+---
+import MainNav from "./MainNav.astro";
+import Logo from "./Logo.astro";
+import Location from "./Location.astro";
+import Contacts from "./Contacts.astro";
+
+const menuItems = [
+	{ label: "Аппараты", href: "/#devices" },
+	{ label: "Установка", href: "/#instalation" },
+	{ label: "О компании", href: "/#about" },
+	{ label: "Отзывы", href: "/#testimonials" },
+	{ label: "FAQ", href: "/#faq" },
+	{ label: "Контакты", href: "/#contacts" }
+];
+---
+
+<div class="drawer drawer_right drawer_burger-panel" data-drawer="burger-panel">
+	<div class="drawer__panel burger-panel" data-elem="drawer.panel">
+		<div class="drawer__close-btn" data-drawer-close="burger-panel"></div>
+		<Logo className="burger-panel__logo" />
+		<MainNav items={menuItems} className="burger-panel__nav" context="burger-panel"></MainNav>
+		<div class="burger-panel__location">
+			<Location />
+		</div>
+		<Contacts className="burger-panel__contacts" context="burger-panel" />
+		<div class="burger-panel__request btn btn_rect btn_md btn_primary">
+			<span class="btn__label">Заказать установку</span>
+			<span class="btn__icon icon-arrow-right"></span>
+		</div>
+	</div>
+</div>

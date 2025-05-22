@@ -1,0 +1,19 @@
+---
+	interface Props {
+		style?: "light" | "dark";
+		className?: string;
+	}
+
+	const { className, style = "dark" } = Astro.props;
+---
+
+<a href="/" class:list={["logo", className]}>
+	<figure>
+		{
+			style == "light" ?
+				<img class="logo__img" src="img/logo-light.svg" alt="CoffeeOn Logo"> :
+				<img class="logo__img" src="img/logo-dark.svg" alt="CoffeeOn Logo">
+		}
+		<figcaption class="logo__caption">CoffeeOn Logotype</figcaption>
+	</figure>
+</a>

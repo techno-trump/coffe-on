@@ -30,7 +30,6 @@ export const processFontFaces = (cb) => {
 		facesDestFile = fs.openSync(facesDestPath, "wx");
 		let pathedFaces = facesSrc.replace(/fonts\//g, `${process.argv.includes('--prod') ? "./" : "/assets/"}fonts/`);
 		pathedFaces = pathedFaces.replace(".icon- {", `[class^="icon-"], [class*=" icon-"] {`);
-			console.log(pathedFaces);
 		fs.writeSync(facesDestFile, pathedFaces, null);
 		fs.closeSync(facesDestFile);
 	} catch(ex) {

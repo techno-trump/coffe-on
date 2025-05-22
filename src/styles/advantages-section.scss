@@ -1,0 +1,83 @@
+@use "./mixins.scss" as mi;
+@use "./config.scss" as config;
+
+.advantages {
+	--col-width: calc((100% - var(--container-save-space) * 2) / 3);
+	display: grid;
+	grid-template-columns: calc(var(--col-width) + var(--container-save-space)) var(--col-width) calc(var(--col-width) + var(--container-save-space));
+	grid-auto-rows: 1fr;
+	@media (max-width: config.$mbpNB) {
+		grid-template-columns: 50% 50%;
+	}
+	@media (max-width: config.$mbpM) {
+		grid-template-columns: 100%;
+		padding: 0 var(--container-save-space);
+	}
+	&__item {
+		&:nth-child(3) {
+			display: flex;
+			flex-direction: column;
+			align-items: start;
+			justify-content: space-between;
+			background-color: var(--color-primary);
+		}
+		@media (min-width: (config.$mbpNB + 1px)) {
+			border: mi.rem(1) solid var(--color-border);
+			padding: mi.rem(20);
+			border-left: none;
+			&:nth-child(3) {
+				grid-row: auto/span 2;
+				border-right: none;
+			}
+			&:nth-child(1), &:nth-child(4) {
+				padding-left: var(--container-save-space);
+			}
+			&:nth-child(1), &:nth-child(2) {
+				border-bottom: none;
+			}
+		}
+		@media (min-width: (config.$mbpM + 1px)) and (max-width: config.$mbpNB) {
+			border: mi.rem(1) solid var(--color-border);
+			padding: mi.rem(20);
+			border-left: none;
+			border-bottom: none;
+			&:nth-child(1), &:nth-child(3), &:nth-child(4) {
+				padding-left: var(--container-save-space);
+			}
+			&:nth-child(2), &:nth-child(3), &:nth-child(5) {
+				border-right: none;
+			}
+			&:nth-child(3) {
+				grid-column: 1/ -1;
+				grid-row: 3/ span 1;
+			}
+		}
+		@media (max-width: config.$mbpM) {
+			padding: mi.rem(20) 0;
+			border-bottom: mi.rem(1) solid var(--color-border);
+			&:nth-child(3) {
+				grid-row: 5/ span 1;
+				background-color: transparent;
+				border-bottom: none;
+			}
+		}
+	}
+	
+	&__item-icon {
+		margin-bottom: mi.rem(40);
+	}
+	&__item-title {
+		margin-bottom: mi.rem(20);
+	}
+	&__item-desc {
+		height: 3.6em;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		@media (max-width: config.$mbpM) {
+			height: auto;
+		}
+	}
+	&__item:not(:nth-child(3)) &__item-desc {
+		color: var(--color-text-base-muted);
+	}
+}

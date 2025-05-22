@@ -1,0 +1,14 @@
+---
+	interface Props {
+		items: Array<{ label: string; href: string; }>;
+		className?: string;
+		context?: string;
+	}
+
+	const { items, className, context } = Astro.props;
+---
+<nav class:list={["main-nav", className, context && `main-nav_${context}`]}>
+	{
+		items.map(({ label, href }) => <a href={href} class="main-nav__item btn btn_link">{label}</a>)
+	}
+</nav>

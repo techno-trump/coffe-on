@@ -1,0 +1,17 @@
+@use "./mixins.scss" as mi;
+@use "./config.scss" as config;
+
+.contact-form-drawer {
+	&__panel {
+		
+	}
+	&__title {
+	}
+	&__body {
+		display: grid;
+		gap: mi.rem(20);
+	}
+	&__submit {
+		max-width: mi.rem(280);
+	}
+}

@@ -1,0 +1,43 @@
+@use "./config.scss" as config;
+@use "./mixins.scss" as mi;
+@use "./intlTelInput";
+
+
+
+.iti {
+	// Стрелка выпадающего меню
+	
+	--iti-arrow-color: var(--color-primary);
+	--iti-triangle-border: #{mi.rem(4)};
+	// &__flag {
+	// 	background-image: url('path/to/flags@2x.png');
+	// 	background-size: 5630px 15px; /* Размеры должны быть адаптированы под исходник */
+	// }
+	&__tel-input {
+		padding-top: 0.15em;
+	}
+	// Поле поиска в дропе
+	&__search-input {
+		padding: mi.rem(10);
+	}
+	// Корень выпадающей панели
+	&__dropdown-content {
+		min-width: mi.rem(280);
+		background-color: var(--color-sf-base);
+	}
+	// Часть со списком стран (скролится)
+	&__country-list {
+		
+		--iti-hover-color: var(--color-primary);
+		color: var(--color-text-alt);
+	}
+	// Контейнер отдельной опции
+	&__country {
+		margin: 0;
+		transition: background-color 0.3s;
+	}
+	&__dial-code {
+		flex: 1 0 auto;
+		text-align: right;
+	}
+}

@@ -1,0 +1,168 @@
+@use "./mixins.scss" as mi;
+@use "./config.scss" as config;
+
+.clients-section {
+	&__wrap {
+		overflow: hidden;
+	}
+	&__container {
+		display: grid;
+		grid-template-columns: 4.79fr 3.55fr 5.64fr;
+		max-width: calc(100% - var(--container-save-space));
+		background-color: var(--color-sf-muted);
+		margin: auto;
+		border-radius: mi.rem(20);
+		min-height: min(74vh, 50vw);
+		min-height: min(74svh, 50vw);
+		@media (max-width: config.$mbpT) {
+			grid-template-columns: 1fr 1fr;
+			max-width: calc(100% - var(--container-save-space) * 2);
+		}
+		@media (max-width: config.$mbpM) {
+			grid-template-columns: 100%;
+		}
+	}
+	&__main, &__stat {
+		padding: mi.rem(40) mi.rem(20);
+		@media (max-width: config.$mbpM) {
+			padding: mi.rem(20) mi.rem(20);
+		}
+	}
+	&__stat {
+		@media (max-width: config.$mbpM) {
+			padding-top: 30px;
+		}
+	}
+	&__main {
+		display: grid;
+		border-right: mi.rem(1) solid var(--color-border);
+		@media (max-width: config.$mbpM) {
+			border-right: none;
+		}
+	}
+	&__main-inner {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		@media (max-width: config.$mbpM) {
+			border-bottom: mi.rem(1) solid var(--color-border);
+			padding-bottom: 20px;
+		}
+	}
+	&__list {
+		margin-bottom: mi.rem(30);
+	}
+	&__btn {
+		width: mi.rem(280);
+		max-width: mi.rem(340);
+		@media (max-width: config.$mbpMM) {
+			width: 100%;
+			align-self: stretch;
+		}
+	}
+	&__logos {
+		position: relative;
+		padding: 0 mi.rem(30);
+		@media (min-width: (config.$mbpM + 1px)) and (max-width: config.$mbpT) {
+			grid-column: 1/span 2;
+			grid-row: 2/span 1;
+		}
+		@media (max-width: config.$mbpT) {
+			padding: 0;
+		}
+	}
+	&__logos-container {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		padding: 0 mi.rem(30);
+		@media (max-width: config.$mbpT) {
+			position: relative;
+			padding: 0 0 40px;
+		}
+		@media (min-width: (config.$mbpM + 1px)) and (max-width: config.$mbpT) {
+			&::before {
+				content: "";
+				display: inline-block;
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 50%;
+				height: 100%;
+				border-right: 1px solid var(--color-border);
+			}
+		}
+		@media (max-width: config.$mbpM) {
+			padding: 0;
+		}
+	}
+	&__logos-wrap {
+		display: flex;
+		flex-direction: column;
+		transition: transform 0.3s linear;
+		@media (max-width: config.$mbpT) {
+			flex-direction: row;
+		}
+	}
+	&__logo {
+		flex: 0 0 auto;
+		display: grid;
+		grid-template-columns: 100%;
+		align-items: center;
+		justify-items: center;
+		background-color: var(--color-sf-base);
+		border-radius: mi.rem(20);
+		& > * {
+			grid-row: 1/span 1;
+			grid-column: 1/span 1;
+			width: 50.84%;
+		}
+		&::before {
+			grid-row: 1/span 1;
+			grid-column: 1/span 1;
+			content: "";
+			padding-top: 71.18%;
+		}
+	}
+	&__stat {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: end;
+		@media (min-width: (config.$mbpM + 1px)) and (max-width: config.$mbpT) {
+			align-items: end;
+			text-align: right;
+		}
+		@media (max-width: config.$mbpM) {
+			align-items: start;
+		}
+	}
+	&__number {
+		color: var(--color-text-alt);
+		font-weight: 600;
+		font-size: mi.rem(140);
+		line-height: 1;
+		letter-spacing: -0.07em;
+		white-space: nowrap;
+		@include mi.aval(font-size, 60, 140, "end", 768, 1440);
+	}
+	&__number-sign {
+		color: var(--color-primary);
+		display: inline-block;
+		position: relative;
+		left: -0.2em;
+		top: -0.3em;
+		font-size: mi.rem(55);
+		line-height: 1.1;
+		letter-spacing: -0.04em;
+		vertical-align: super;
+	}
+	&__description {
+		max-width: mi.rem(350);
+	}
+	&__testimonials {
+		display: none;
+	}
+}

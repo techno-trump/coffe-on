@@ -1,0 +1,148 @@
+@use "./mixins.scss" as mi;
+@use "./config.scss" as config;
+
+.hero-section {
+	display: grid;
+	grid-template-columns: 50% 50%;
+	overflow: hidden;
+	background-color: var(--color-sf-muted);
+	@media (max-width: config.$mbpM) {
+		grid-template-columns: 100%;
+	}
+	&__slider {
+		position: relative;
+		grid-column: 2/span 1;
+		grid-row: 1/span 1;
+		overflow: hidden;
+		@media (max-width: config.$mbpM) {
+			grid-column: 1/span 1;
+			grid-row: auto/span 1;
+		}
+		&::before {
+			position: absolute;
+			z-index: 1;
+			bottom: 0;
+			left: 0;
+			content: "";
+			display: block;
+			width: 100%;
+			height: 33%;
+			background: linear-gradient(180deg, rgba(28, 28, 28, 0) 0%, rgba(28, 28, 28, 0.6) 100%);
+		}
+	}
+	&__slide {
+		--ratio: 75%;
+		flex: 0 0 auto;
+		min-height: 620px;
+		@media (max-width: config.$mbpPC) {
+			min-height: 480px;
+		}
+		@media (max-width: config.$mbpM) {
+			--ratio: 90%;
+		}
+	}
+	&__slider-wrap {
+		display: flex;
+	}
+	&__slider-footer {
+		color: var(--color-text-inverse);
+		position: absolute;
+		z-index: 2;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		gap: mi.rem(30);
+		display: flex;
+		align-items: end;
+		justify-content: space-between;
+		padding: mi.rem(40);
+		@media (max-width: config.$mbpM) {
+			padding: mi.rem(40) var(--container-save-space);
+		}
+	}
+	&__slider-info {
+		display: grid;
+		justify-content: space-between;
+		grid-template-areas: "current total" "timer-bar timer-bar";
+		width: mi.rem(210);
+	}
+	&__slider-current {
+		grid-area: current;
+	}
+	&__slider-total {
+		grid-area: total;
+	}
+	&__slider-timer-bar {
+		position: relative;
+		grid-area: timer-bar;
+		height: mi.rem(3);
+		width: 100%;
+		margin-top: mi.rem(10);
+		&::before, &::after {
+			content: "";
+			display: block;
+			height: 100%;
+			border-radius: mi.rem(1.5);
+		}
+		&::before {
+			width: 100%;
+			opacity: 0.5;
+			background-color: var(--color-sf-disabled);
+		}
+		&::after {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: var(--progress);
+			background-color: var(--color-primary);
+			transition: width 0.2s linear;
+		}
+	}
+	&__slider-nav {
+		display: inline-grid;
+		grid-auto-flow: column;
+		gap: mi.rem(10);
+	}
+	&__container {
+		grid-row: 1/ span 1;
+		grid-column: 1/ -1;
+		@media (min-width: (config.$mbpM + 1px)) {
+			display: grid;
+			grid-template-columns: 50% 50%;
+		}
+	}
+	&__info {
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+		justify-content: space-between;
+		padding: mi.rem(40);
+		padding-left: 0;
+		@media (max-width: config.$mbpM) {
+			padding: mi.rem(40) 0;
+		}
+		@media (max-width: config.$mbpMM) {
+			padding: mi.rem(30) 0;
+		}
+	}
+	&__header {
+		margin-bottom: mi.rem(40);
+	}
+	&__title {
+		margin-bottom: mi.rem(20);
+		@media (max-width: config.$mbpMM) {
+			margin-bottom: mi.rem(15);
+		}
+	}
+	&__sub-title {
+		color: var(--color-text-base-muted);
+		max-width: mi.rem(370);
+	}
+	&__request {
+		width: mi.rem(380);
+		max-width: 100%;
+		@media (max-width: config.$mbpMM) {
+			width: 345px;
+		}
+	}
+}

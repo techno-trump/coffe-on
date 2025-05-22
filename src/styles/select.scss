@@ -1,0 +1,91 @@
+@use "./mixins.scss" as mi;
+@use "./config.scss" as config;
+
+.tomselected {
+	display: none;
+}
+$block: ".select";
+#{$block} {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	&__control {
+		flex: 1 1 auto;
+		position: relative;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-right: mi.rem(24);
+		& .items-placeholder {
+			color: inherit;
+			position: absolute;
+			left: 0;
+			top: 0;
+			background-color: transparent;
+			width: 100%;
+			height: 100%;
+			&::placeholder {
+				color: var(--color-text-inverse-muted-alfa);
+			}
+		}
+		#{$block}.has-items & .items-placeholder {
+			visibility: hidden;
+		}
+	}
+	&__arrow {
+		position: absolute;
+		right: mi.rem(10);
+		top: 50%;
+		display: inline-block;
+		margin-left: var(--iti-arrow-padding);
+		width: 0;
+		height: 0;
+		border-left: #{mi.rem(4)} solid transparent;
+		border-right: #{mi.rem(4)} solid transparent;
+		border-top: #{mi.rem(4)} solid var(--color-primary);
+		transform: translateY(-50%);
+		transition: transform 0.3s;
+	}
+	&.dropdown-active &__arrow {
+		transform: translateY(-50%) rotateX(180deg);
+	}
+	&__option {
+		cursor: pointer;
+		transition: background-color 0.3s;
+		
+		&.selected {
+			background-color: var(--color-primary);
+		}
+		padding: mi.rem(5);
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: var(--color-primary);
+			}
+		}
+	}
+	& .dropdown-input {
+		padding: mi.rem(5);
+	}
+	&__item {
+		flex: 0 1 auto;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		min-width: 0;
+		max-width: 100%;
+		overflow: hidden;
+	}
+	&__dropdown {
+		font-weight: 500;
+		font-size: 18px;
+		position: absolute;
+		z-index: 100;
+		top: calc(100% + mi.rem(4));
+		width: 100%;
+		min-width: mi.rem(280);
+		color: var(--color-text-base-muted);
+		background-color: var(--color-sf-base);
+		padding: mi.rem(5) 0;
+	}
+}

@@ -1,0 +1,19 @@
+@use "./mixins.scss" as mi;
+@use "./config.scss" as config;
+
+.staff-slider {
+	&__wrapper {
+		display: flex;
+		transition: transform 0.5s linear;
+	}
+	&__slide {
+		flex: 0 0 auto;
+		--ratio: 113.63%;
+		width: calc((100% + #{mi.rem(20)}) / 3);
+		padding-right: mi.rem(20);
+	}
+	&__slide-inner {
+		border-radius: mi.rem(20);
+		overflow: hidden;
+	}
+}

@@ -2,22 +2,431 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Boilerplate" description="Index page" empty={true}>
-	<div class="container">
-		<div class="pages">
-			<h3>Pages</h3>
-			<ol>
-				<li><a href="./home.html" class="link">Home</a></li>
-			</ol>
+<Layout title="CoffeOn" description="Домашняя страница">
+	<section class="hero-section">
+		<div class="hero-section__slider" data-component=":hero-slider:" data-autoplay-delay="5000">
+			<div class="hero-section__slider-wrap">
+				{
+					["", "", ""].map(() => <div class='hero-section__slide ratio-wrap ratio-wrap_cover'>
+																		<img src="img/hero_01.jpg" class="ratio-wrap__item" />
+																	</div>)
+				}
+				
+			</div>
+			<div class="hero-section__slider-footer">
+				<div class="hero-section__slider-info">
+					<div class="hero-section__slider-current" data-elem="hero-slider.current"></div>
+					<div class="hero-section__slider-total" data-elem="hero-slider.total"></div>
+					<div class="hero-section__slider-timer-bar" data-elem="hero-slider.timer-bar"></div>
+				</div>
+				<div class="hero-section__slider-nav">
+					<button type="button" class="slider-nav-btn" data-elem="hero-slider.prev">
+						<div class="slider-nav-btn__icon icon-arrow-left"></div>
+						<div class="slider-nav-btn__label">К предидущему слайду</div>
+					</button>
+					<button type="button" class="slider-nav-btn" data-elem="hero-slider.next">
+						<div class="slider-nav-btn__icon icon-arrow-right"></div>
+						<div class="slider-nav-btn__label">К следующему слайду</div>
+					</button>
+				</div>
+			</div>
 		</div>
-	</div>
+		<div class="container hero-section__container">
+			<div class="hero-section__info">
+				<div class="hero-section__header">
+					<h1 class="hero-section__title">Бесплатная установка и обслуживание вендинговых аппаратов</h1>
+					<div class="hero-section__sub-title tg-text-normal">Кофейные автоматы и снековые автоматы с размещением в Москве и МО от 3-х дней</div>
+				</div>
+				<button type="button" class="hero-section__request btn btn_rect btn_lg btn_primary">
+					<span class="btn__label">Оставить заявку</span>
+					<span class="btn__icon icon-arrow-right"></span>
+				</button>
+			</div>
+		</div>
+	</section>
+	<section class="agregates section-space-top-big section-space-bottom">
+		<div class="container agregates__container">
+			<div class="agregates__card agregates-promo-card">
+				<div class="agregates-promo-card__title tg-h2">Надежные итальянские автоматы</div>
+				<div class="agregates-promo-card__footer">
+					<div class="agregates-promo-card__tip tg-text-normal">Бесплатно доставим и установим аппарат</div>
+					<button type="button" class="agregates-promo-card__request btn btn_rect btn_lg btn_primary">
+						<span class="btn__label">Оставить заявку</span>
+						<span class="btn__icon icon-arrow-right"></span>
+					</button>
+				</div>
+			</div>
+			<a href="#" class="agregates-list-card">
+				<div class="agregates-list-card__header">
+					<div class="agregates-list-card__title tg-text-big">Кофейные автоматы</div>
+					<span class="icon-lightning agregates-list-card__icon"></span>
+				</div>
+				<div class="ratio-wrap ratio-wrap_contain agregates-list-card__img-wrap">
+					<img src="img/agregate-coffee.png" class="img-wrap__item"></img>
+				</div>
+				<div class="agregates-list-card__footer tg-text-normal">
+					<span class="agregates-list-card__number">8 моделей</span>
+					<span class="agregates-list-card__advantages">от 7 до 24 видов напитков</span>
+				</div>
+			</a>
+			<a href="#" class="agregates-list-card">
+				<div class="agregates-list-card__header">
+					<div class="agregates-list-card__title tg-text-big">Снековые автоматы</div>
+					<span class="icon-lightning agregates-list-card__icon"></span>
+				</div>
+				<div class="ratio-wrap ratio-wrap_contain agregates-list-card__img-wrap">
+					<img src="img/agregate-snack.png" class="img-wrap__item"></img>
+				</div>
+				<div class="agregates-list-card__footer tg-text-normal">
+					<span class="agregates-list-card__number">5 моделей</span>
+					<span class="agregates-list-card__advantages">Индивидуальное меню</span>
+				</div>
+			</a>
+		</div>
+	</section>
+	<section class="section-space">
+		<div class="container section__header">
+			<div class="section__title tg-text-normal">Преимущества</div>
+			<div class="section__desc tg-h2">Наш подход к работе</div>
+		</div>
+		<div class="advantages">
+			{
+				[
+					{ iconSrc: "img/icon-coffee.svg", title: "Итальянские ингредиенты", desc: "Используем капсулы Lavazza LB с натуральным зерновым кофе и продукцию «Ristora»" },
+					{ iconSrc: "img/icon-document.svg", title: "Честный и прозрачный бизнес", desc: "Заключаем договоры, предоставляем  закрывающие документы, соблюдаем 54-ФЗ и выдаём фискальные чеки" },
+					{ iconSrc: "img/icon-wrench.svg", title: "Решаем неисправности за 4 часа", desc: "Полная замена автомата за 1-2 дня" },
+					{ iconSrc: "img/icon-user.svg", title: "Персональный менеджер", desc: "Будет закреплен за вами после установки" },
+					{ iconSrc: "img/icon-wallet.svg", title: "Современное оборудование", desc: "Оплата наличными, картой или телефоном" }
+				].map(({ iconSrc, title, desc }) => <div class="advantages__item">
+													<img src={iconSrc} class="advantages__item-icon" />
+													<div class="advantages__item-info">
+														<div class="advantages__item-title tg-text-big">{title}</div>
+														<div class="advantages__item-desc tg-text-normal">{desc}</div>
+													</div>
+												</div>)
+			}
+			
+		</div>
+	</section>
+	<section class="clients-section section-space-top section-space-bottom-small tg-text-normal">
+		<div class="clients-section__wrap">
+			<div class="clients-section__container">
+				<div class="clients-section__main">
+					<div class="clients-section__main-inner">
+						<div class="section__header">
+							<div class="section__title tg-text-normal">Клиенты</div>
+							<div class="section__desc tg-h2">Наши автоматы уже стоят здесь</div>
+						</div>
+						<div class="clients-section__main-body">
+							<ul class="clients-section__list">
+								<li class="clients-section__item">Корпоративные офисы</li>
+								<li class="clients-section__item">Логистические центры</li>
+								<li class="clients-section__item">Торговые центры</li>
+								<li class="clients-section__item">Склады</li>
+								<li class="clients-section__item">Аэропорты</li>
+								<li class="clients-section__item">Производственные объекты</li>
+								<li class="clients-section__item">Образовательные учреждения</li>
+								<li class="clients-section__item">Медицинские учреждения и др.</li>
+							</ul>
+							<a data-fslightbox="testimonials" href="img/testimonials/01.jpg" class="clients-section__btn btn btn_rect btn_lg btn_primary">
+								<span class="btn__label">Читать отзывы</span>
+								<span class="btn__icon icon-arrow-right"></span>
+							</a>
+							<div class="clients-section__testimonials">
+								<a data-fslightbox="testimonials" href="img/testimonials/02.jpg"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clients-section__logos">
+					<div class="clients-section__logos-container" data-component=":logos-slider:">
+						<div class="clients-section__logos-wrap">
+							{
+								["eurohim.png", "moslift.png", "delowyjelinii.png", "invitro.png", "consulstvo.png", "cosmos.png", "bank.png", "medicine.png"]
+									.map((imgSrc) => <div class="clients-section__logo"><img src={`img/logos/${imgSrc}`} alt=""></div>)
+							}
+						</div>
+					</div>
+				</div>
+				<div class="clients-section__stat">
+					<div class="clients-section__stat-wrap">
+						<span class="clients-section__number">
+							3 000
+							<span class="clients-section__number-sign">+</span>
+						</span>
+						<div class="clients-section__description tg-text-big">успешно установленных аппаратов в Москве и области</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="cases-slider-section section-space-bottom">
+		<div class="container cases-slider-section__slider" data-component=":cases-slider:">
+			<div class="cases-slider-section__wrapper">
+				{
+					[
+						{ imgSrc: "01.jpg", format: "thin" },
+						{ imgSrc: "02.jpg", format: "thin" },
+						{ imgSrc: "03.jpg", format: "thin" },
+						{ imgSrc: "04.jpg", format: "wide" },
+						{ imgSrc: "05.jpg", format: "thin" },
+						{ imgSrc: "06.jpg", format: "thin" },
+						{ imgSrc: "07.jpg", format: "wide" },
+						{ imgSrc: "08.jpg", format: "thin" },
+					].map(({ imgSrc, format }) => <div class=`cases-slider-section__slide cases-slider-section__slide_${format} ratio-wrap ratio-wrap_cover`>
+																					<img src={`img/cases/${imgSrc}`} alt={imgSrc} class="ratio-wrap__item" />
+																				</div>)
+				}
+			</div>
+			<div class="cases-slider-section__cursor">
+				<div class="icon-arrow-left"></div>
+				<div class="icon-arrow-right"></div>
+			</div>
+		</div>
+	</section>
+	<section class="section-space">
+		<div class="container">
+			<div class="section__header steps-section__header">
+				<div class="section__title tg-text-normal">Этапы работы</div>
+				<div class="section__desc tg-h2">Установим оборудование и полностью возьмем обслуживание на себя</div>
+			</div>
+			<div class="installation-steps">
+				{
+					[
+						{ title: "Оставьте заявку на нашем сайте", desc: "Проконсультируем вас, назначим встречу" },
+						{ title: "Приедем на вашу локацию", desc: "Подберем оборудование, согласуем меню и место установки, подпишем договор" },
+						{ title: "Беспланто доставим и установим аппарат", desc: "Регулярно будем загружать ингредиенты и чистить оборудование" }
+					].map(({ title, desc }) => <div class="installation-step-card">
+																				<div class="installation-step-card__number"></div>
+																				<div class="installation-step-card__info">
+																					<div class="installation-step-card__title tg-text-big">{title}</div>
+																					<div class="installation-step-card__desc tg-text-normal">{desc}</div>
+																				</div>
+																			</div>)
+				}
+			</div>
+		</div>
+	</section>
+	<section class="form-section form-section_primary form-section_horizontal section-space">
+		<div class="container">
+			<div class="form-section__header">
+				<div class="form-section__title tg-h2">Заполните форму, и наш<br>менеджер с вами свяжется</div>
+				<div class="form-section__note">Для установки потребуется только 1м<sup>2</sup> площади и розетка</div>
+			</div>
+			<form class="form-section__form form-section__form">
+				<input class="form-input" name="full-name" type="text" required placeholder="Имя*">
+				<input class="form-input" name="tel" type="text" required  data-component=":tel-input:">
+				<select class="form-select" name="location-type" data-component=":select:">
+					<option value="" disabled selected>Тип помещения</option>
+					<option value="Торговый центр">Торговый центр</option>
+					<option value="Минимаркет">Минимаркет</option>
+				</select>
+				<label class="form-checkbox form-section__agreement form-section__field_lg">
+					<span class="cm-checkbox form-checkbox__input">
+						<input type="checkbox" class="cm-checkbox__input" />
+						<span class="cm-checkbox__body icon-checkbox"></span>
+						<span class="cm-checkbox__body cm-checkbox__body_checked icon-checkbox-checked"></span>
+					</span>
+					<span class="form-checkbox__label tg-caption">Я согласен с <a href="#" class="link underline">политикой конфиденциальности</a></span>
+				</label>
+				<button type="button" class="form-section__submit btn btn_rect btn_lg btn_primary">
+					<span class="btn__label">Оставить заявку</span>
+					<span class="btn__icon icon-arrow-right"></span>
+				</button>
+			</form>
+		</div>
+	</section>
+	<section class="section-space-top section-space-small-bottom">
+		<div class="container">
+			<div class="section__header steps-section__header">
+				<div class="section__title tg-text-normal">О компании</div>
+				<div class="section__desc tg-h2">Более 20 лет опыта работы с вендинговыми аппаратами</div>
+			</div>
+			<div class="stats section-space-small">
+				<div class="stats-item stats-item_main">
+					<div class="stats-item__heading tg-text-big">Работаем<br>с 2004 года</div>
+					<p class="stats-item__description tg-text-normal">
+						Предоставляем полный цикл услуг. Сотрудничаем с мировыми поставщиками оборудования и ингредиентов
+					</p>
+				</div>
+
+				<div class="stats-item stats-item_highlight stats-item_metric">
+					<div class="stats-item__header">
+						<div class="stats-item__number">14</div>
+						<div class="stats-item__unit tg-text-big">лет</div>
+					</div>
+					<div class="stats-item__note">Непрерывной работы с самым лояльным клиентом</div>
+				</div>
+
+				<div class="stats-item stats-item_metric">
+					<div class="stats-item__header">
+						<div class="stats-item__number">&gt;5<span class="stats-item__number-unit">млн</span></div>
+						<div class="stats-item__unit tg-text-big">чашек</div>
+					</div>
+					<div class="stats-item__note">Приготовлено для наших клиентов</div>
+				</div>
+
+				<div class="stats-item stats-item_metric">
+					<div class="stats-item__header">
+						<div class="stats-item__number">120</div>
+						<div class="stats-item__unit tg-text-big">адресов</div>
+					</div>
+					<div class="stats-item__note">Уже обслуживаются по Москве и области</div>
+					<img src="img/map.png" class="stats-item__bg" alt="Stats map"></img>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="section-space-bottom overflow-hidden">
+		<div class="container staff-slider" data-component=":staff-slider:">
+			<div class="staff-slider__wrapper">
+				{
+					[
+						{ imgSrc: "01.jpg" },
+						{ imgSrc: "02.jpg" },
+						{ imgSrc: "03.jpg" },
+						{ imgSrc: "04.jpg" },
+					].map(({ imgSrc }) => <div class=`staff-slider__slide`>
+																	<div class="staff-slider__slide-inner ratio-wrap ratio-wrap_cover">
+																		<img src={`img/staff/${imgSrc}`} alt={imgSrc} class="ratio-wrap__item" />
+																	</div>
+																</div>)
+				}
+			</div>
+		</div>
+	</section>
+	<section class="form-section form-section_primary form-section_divided section-space">
+		<div class="container form-section__container">
+			<div class="form-section__header">
+				<div class="form-section__title tg-h2">Хотите установить вендинговое оборудование с бесплатным обслуживанием?</div>
+				<div class="form-section__note">Заполните форму, и наш менеджер свяжется с вами в ближайшее время</div>
+			</div>
+			<form class="form-section__form form-section__form">
+				<input class="form-input" name="full-name" type="text" required placeholder="Имя*">
+				<input class="form-input" name="tel" type="text" required  data-component=":tel-input:">
+				<select class="form-select form-section__field_lg" name="location-type" data-component=":select:">
+					<option value="" disabled selected>Тип помещения</option>
+					<option value="Торговый центр">Торговый центр</option>
+					<option value="Минимаркет">Минимаркет</option>
+				</select>
+				<div class="form-field form-section__field_lg">
+					<div class="form-field__label tg-text-mini">Проходимость</div>
+					<div class="range-slider tg-text-mini form-field__input" data-component=":range-slider:">
+						<div class="range-slider__min">10</div>
+						<div class="range-slider__max" data-prefix=">">100</div>
+						<div class="range-slider__current" data-elem="range-slider.current">42</div>
+						<input type="range" name="traffic" class="range-slider__input" value="42" min="10" max="100">
+					</div>
+				</div>
+				<label class="form-checkbox form-section__agreement form-section__field_lg">
+					<span class="cm-checkbox form-checkbox__input">
+						<input type="checkbox" class="cm-checkbox__input" />
+						<span class="cm-checkbox__body icon-checkbox"></span>
+						<span class="cm-checkbox__body cm-checkbox__body_checked icon-checkbox-checked"></span>
+					</span>
+					<span class="form-checkbox__label tg-caption">Я согласен с <a href="#" class="link underline">политикой конфиденциальности</a></span>
+				</label>
+				<button type="button" class="form-section__submit btn btn_rect btn_lg btn_primary">
+					<span class="btn__label">Оставить заявку</span>
+					<span class="btn__icon icon-arrow-right"></span>
+				</button>
+			</form>
+		</div>
+	</section>
+	<section class="section-space news-list-section" data-component=":news-slider:">
+		<div class="container news-list-section__container">
+			<div class="news-list-section__header">
+				<div class="news-list-section__title tg-h2">Новости и акции</div>
+				<div class="news-list-section__actions">
+					<button type="button" class="slider-nav-btn" data-elem="news-slider.prev">
+						<div class="slider-nav-btn__icon icon-arrow-left"></div>
+						<div class="slider-nav-btn__label">К предидущему слайду</div>
+					</button>
+					<button type="button" class="slider-nav-btn" data-elem="news-slider.next">
+						<div class="slider-nav-btn__icon icon-arrow-right"></div>
+						<div class="slider-nav-btn__label">К следующему слайду</div>
+					</button>
+				</div>
+			</div>
+			<div class="news-list-section__body" data-elem="news-slider.slider">
+				<div class="news-list-section__wrapper">
+					{
+						[
+							{ imgSrc: "01.jpg", title: "Как кофейные автоматы помогают HR удерживать сотрудников?" },
+							{ imgSrc: "02.jpg", title: "5 преимуществ установки кофейных автоматов в офисах " },
+							{ imgSrc: "03.jpg", title: "Кофеварка VS Вендинговый автомат" },
+							{ imgSrc: "04.jpg", title: "Как кофейные автоматы поддерживают комфорт пациентов и персонала?" }
+						].map(({ imgSrc, title }) => <div class="news-list-section__slide">
+																		<div class="news-list-card">
+																			<div class="news-list-card__top">
+																				<div class=`ratio-wrap ratio-wrap_cover news-list-card__view`>
+																					<img src={`img/news/${imgSrc}`} alt={imgSrc} class="ratio-wrap__item" />
+																				</div>
+																				<div class="news-list-card__title tg-text-big">{title}</div>
+																			</div>
+																			<a href="#" class="news-list-card__link link">
+																				<div class="link__label">Подробнее</div>
+																				<div class="link__icon icon-arrow-right"></div>
+																			</a>
+																		</div>
+																	</div>)
+					}
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="section-space faq-section">
+		<div class="container faq-section__container">
+			<div class="faq-section__title tg-h2">Отвечаем на частые вопросы</div>
+			<div class="faq-section__body">
+				{
+					[
+						{ question: "Сколько стоит установка?", answer: "Установка аппарата бесплатная. Полностью берем на себя обслуживание: загрузка ингридиентов, настройка оборудования, ремонт или замена техники в случае неисправностей." },
+						{ question: "Что делать, если аппарат сломается?", answer: "Установка аппарата бесплатная. Полностью берем на себя обслуживание: загрузка ингридиентов, настройка оборудования, ремонт или замена техники в случае неисправностей." },
+						{ question: "Мне нужно следить за автоматом?", answer: "Установка аппарата бесплатная. Полностью берем на себя обслуживание: загрузка ингридиентов, настройка оборудования, ремонт или замена техники в случае неисправностей." },
+						{ question: "Как вы понимаете, что в аппарате закончились кофе и еда?", answer: "Установка аппарата бесплатная. Полностью берем на себя обслуживание: загрузка ингридиентов, настройка оборудования, ремонт или замена техники в случае неисправностей." },
+						{ question: "Какой кофе используется?", answer: "Установка аппарата бесплатная. Полностью берем на себя обслуживание: загрузка ингридиентов, настройка оборудования, ремонт или замена техники в случае неисправностей." },
+						{ question: "Сколько стоит чашка кофе?", answer: "Установка аппарата бесплатная. Полностью берем на себя обслуживание: загрузка ингридиентов, настройка оборудования, ремонт или замена техники в случае неисправностей." }
+					].map(({ question, answer }) => {
+						return <div class="disclosure faq-item" data-component=":disclosure:">
+							<div class="faq-item__header" data-elem="disclosure.toggle">
+								<div class="faq-item__question tg-text-big">{question}</div>
+								<div class="faq-item__state"></div>
+							</div>
+							<div class="disclosure__body faq-item__body">
+								<div class="disclosure__inner faq-item__answer tg-text-normal" data-elem="disclosure.inner">
+									{answer}
+								</div>
+							</div>
+						</div>
+					})
+				}
+			</div>
+		</div>
+	</section>
+	<section class="form-section form-section_secondary form-section_divided section-space">
+		<div class="container form-section__container">
+			<div class="form-section__header">
+				<div class="form-section__title tg-h2 tg-h2_lh-big">Уже являетесь нашим клиентом и хотите дать обратную связь?</div>
+				<div class="form-section__note">Ваше мнение поможет нам улучшить работу</div>
+			</div>
+			<form class="form-section__form form-section__form">
+				<input class="form-input" name="full-name" type="text" required placeholder="Имя*">
+				<input class="form-input" name="tel" type="text" required  data-component=":tel-input:">
+				<textarea class="form-input form-section__field_lg" name="comment" placeholder="Комментарий"></textarea>
+				<label class="form-checkbox form-section__agreement form-section__field_lg">
+					<span class="cm-checkbox form-checkbox__input">
+						<input type="checkbox" class="cm-checkbox__input" />
+						<span class="cm-checkbox__body icon-checkbox"></span>
+						<span class="cm-checkbox__body cm-checkbox__body_checked icon-checkbox-checked"></span>
+					</span>
+					<span class="form-checkbox__label tg-caption">Я согласен с <a href="#" class="link underline">политикой конфиденциальности</a></span>
+				</label>
+				<button type="button" class="form-section__submit btn btn_rect btn_lg btn_primary">
+					<span class="btn__label">Оставить заявку</span>
+					<span class="btn__icon icon-arrow-right"></span>
+				</button>
+			</form>
+		</div>
+	</section>
 </Layout>
-<style>
-	.container {
-		padding: 40px;
-	}
-	h3 {
-		font-weight: 600;
-		margin-bottom: 20px;
-	}
-</style>

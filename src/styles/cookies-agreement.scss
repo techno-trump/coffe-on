@@ -1,0 +1,37 @@
+@use "./mixins.scss" as mi;
+@use "./config.scss" as config;
+
+.drawer {
+		&__panel {
+		}
+}
+.coockies-agreement {
+	display: flex;
+	justify-content: end;
+	align-items: end;
+	padding: mi.rem(20);
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(mi.rem(20));
+	transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+	&.drawer_open {
+		opacity: 1;
+		visibility: visible;
+		transform: none;
+	}
+	&__panel {
+		--color: var(--color-text-alt);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: mi.rem(66);
+		max-width: mi.rem(555);
+		padding: mi.rem(30);
+		background-color: var(--color-sf-root);
+		border-radius: mi.rem(20);
+		color: var(--color-text-base-muted);
+	}
+	&__btn {
+		padding: mi.rem(10) mi.rem(20);
+	}
+}

@@ -1,6 +1,9 @@
 Number.prototype.clamp = function (min, max) {
 	return Math.max(min, Math.min(this.valueOf(), max));
 }
+export function addLeadingZero(value) {
+	return Number(value) < 10 ? `0${value}` : value;
+}
 export let isMobile = { Android: function () { return navigator.userAgent.match(/Android/i); }, BlackBerry: function () { return navigator.userAgent.match(/BlackBerry/i); }, iOS: function () { return navigator.userAgent.match(/iPhone|iPad|iPod/i); }, Opera: function () { return navigator.userAgent.match(/Opera Mini/i); }, Windows: function () { return navigator.userAgent.match(/IEMobile/i); }, any: function () { return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()); } };
 export function isEmpty(value) {
 	return value === null || value === undefined || value === "";

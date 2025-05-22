@@ -1,0 +1,19 @@
+@use "./config.scss" as config;
+@use "./mixins.scss" as mi;
+
+.breadcrumbs {
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: mi.rem(10);
+	align-items: center;
+	&__separator {
+		font-size: 0.7em;
+		color: var(--color-text-alt);
+	}
+	&__item {
+		--color: var(--color-text-base-muted);
+		&_active {
+			color: var(--color-text-alt);
+		}
+	}
+}

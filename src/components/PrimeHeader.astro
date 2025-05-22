@@ -1,0 +1,49 @@
+---
+import MainNav from "./MainNav.astro";
+import Logo from "./Logo.astro";
+import Location from "./Location.astro";
+
+const menuItems = [
+	{ label: "Аппараты", href: "/#devices" },
+	{ label: "Установка", href: "/#instalation" },
+	{ label: "О компании", href: "/#about" },
+	{ label: "Отзывы", href: "/#testimonials" },
+	{ label: "FAQ", href: "/#faq" },
+];
+//const portalHost = import.meta.env.ASTRO_APP_CABINET_HOST;
+---
+
+<header id="header" class="header header_prime tg-text-mini">
+	<div class="container header__container">
+		<div class="header__section header__section_logo">
+			<Logo className="header__logo" />
+		</div>
+		<div class="header__section header__section_nav">
+			<MainNav items={menuItems} className="header__nav"></MainNav>
+		</div>
+		<div class="header__section header__section_location">
+			<Location />
+		</div>
+		<div class="header__section header__section_contacts">
+			<a href="tel:+70000000000" class="btn btn_link"><span class="btn__label">+ 7 (000) 000-00-00</span></a>
+			<div class="social">
+				<a href="#" class="btn btn_social">
+					<div class="btn__icon icon-telegram"></div>
+					<div class="btn__label btn__label_hidden">Telegram</div>
+				</a>
+				<a href="#" class="btn btn_social">
+					<div class="btn__icon icon-watsapp"></div>
+					<div class="btn__label btn__label_hidden">WatsApp</div>
+				</a>
+			</div>
+		</div>
+		<div class="header__section header__section_burger-btn">
+			<button class="burger-btn" data-drawer-toggle="burger-panel">
+				<span class="burger-btn__inner">
+					<span></span><span></span><span></span>
+				</span>
+				<div class="burger-btn__label">Показать бургер меню</div>
+			</button>
+		</div>
+	</div>
+</header>
