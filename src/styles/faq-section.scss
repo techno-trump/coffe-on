@@ -4,6 +4,9 @@
 .faq-section {
 	&__title {
 		margin-bottom: mi.rem(60);
+		@media (max-width: config.$mbpT) {
+			margin-bottom: mi.rem(40);
+		}
 	}
 }
 .faq-item {

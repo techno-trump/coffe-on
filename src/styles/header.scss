@@ -65,7 +65,11 @@
 		width: calc(100% - var(--scroll-compensation));
 		z-index: 1000;
 		transform: translateY(-100%);
+		body.admin-bar & {
+			top: 32px;
+		}
 	}
+	
 	html._initialized &_second {
 		transition: transform 0.3s;
 	}

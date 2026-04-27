@@ -92,25 +92,6 @@ const mode = import.meta.env.MODE as ("development" | "production");
 			}
 			
 		</style>
-		<script>
-			var splash = document.querySelector(".splash") as HTMLElement;
-			var progressElem = splash.querySelector(".splash__progress") as HTMLElement;
-			var progress = 0;
-			var step = 30;
-			var intervalId = setInterval(function() {
-				progress += Math.floor(step);
-				step = step > 1 ? step / 1.5 : step;
-				progressElem.textContent = progress.toString();
-				splash?.style.setProperty("--progress", 100 - Number(progress) + "%");
-				if (progress >= 100) complete();
-			}, 500);
-			window.addEventListener("load", complete);
-			function complete() {
-					console.log("Page loading completed");
-				clearInterval(intervalId);
-				splash.classList.add("_hidden");
-			}
-		</script>
 		<div class="splash">
 			<svg class="splash__lightning" viewBox="0 0 90 198" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<mask id="lightning-mask" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="90" height="198">
@@ -127,6 +108,39 @@ const mode = import.meta.env.MODE as ("development" | "production");
 			</svg>
 			<div class="splash__progress">0</div>
 		</div>
+		<script>
+			var pageLoad = document.readyState === 'complete';
+			var splash = document.querySelector(".splash")  as HTMLElement;
+			var progressElem = splash?.querySelector(".splash__progress") as HTMLElement;
+			var barCompleted = false;
+			var progress = 0;
+			var step = 2;
+			var intervalId = setInterval(function() {
+				progress += step;
+				progressElem.textContent = progress.toString();
+				splash?.style.setProperty("--progress", 100 - Number(progress) + "%");
+				if (progress >= 100) {
+					clearInterval(intervalId);
+					setBarCompleted(true);
+				}
+			}, 5);
+			window.addEventListener("load", () => setPageLoad(true));
+			function setBarCompleted(next: boolean) {
+				barCompleted = next;
+				combineComplete();
+			}
+			function setPageLoad(next: boolean) {
+				pageLoad = next;
+				combineComplete();
+			}
+			function combineComplete() {
+				if (pageLoad && barCompleted) complete();
+			}
+			function complete() {
+				document.documentElement.classList.add("_ready");
+				splash.classList.add("_hidden");
+			}
+		</script>
 		{empty ? null : <Fragment>
 											<PrimeHeader/>
 											<SecondHeader/>
@@ -135,13 +149,15 @@ const mode = import.meta.env.MODE as ("development" | "production");
 			<slot />
 		</main>
 		{empty ? null : <Footer></Footer>}
-		<div class="drawers">
-			<slot name="drawers" />
+		<div class="drawers" data-lenis-prevent>
 			<BurgerPanel />
 			<CoockiesAgreement />
 			<ContactFormDrawer />
 			<ThanksDrawer />
 			<ExceptionDrawer />
+		</div>
+		<div class="page-drawers">
+			<slot name="drawers" />
 		</div>
 		<div class="go-up-layer">
 			<div class="container go-up-layer__container">

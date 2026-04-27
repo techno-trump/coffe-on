@@ -13,8 +13,11 @@
 	// 	background-image: url('path/to/flags@2x.png');
 	// 	background-size: 5630px 15px; /* Размеры должны быть адаптированы под исходник */
 	// }
+	&--container {
+		z-index: 10000;
+	}
 	&__tel-input {
-		padding-top: 0.15em;
+		padding-top: 0.1em;
 	}
 	// Поле поиска в дропе
 	&__search-input {

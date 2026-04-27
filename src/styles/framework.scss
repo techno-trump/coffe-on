@@ -137,12 +137,6 @@
 		font-size: mi.rem(13);
 		padding: mi.rem(12);
 	}
-	&_location {
-		gap: 5px;
-	}
-	&_location &__icon {
-		font-size: 0.9em;
-	}
 	&_social &__icon {
 		font-size: 1em;
 	}
@@ -241,6 +235,9 @@
 	z-index: var(--z-index, 1);
 	pointer-events: none;
 	visibility: hidden;
+	&_burger-panel {
+		overflow: hidden;
+	}
 	&_open {
 		visibility: visible;
 	}
@@ -301,6 +298,14 @@
 		right: mi.rem(15);
 		top: mi.rem(15);
 		z-index: 2;
+		&::before, &::after {
+			background-color: var(--color-sf-inverse);
+		}
+		@media (any-hover: hover) {
+			&:hover::before, &:hover::after {
+				background-color: var(--color-sf-alt);
+			}
+		}
 	}
 	&__panel {
 		position: relative;
@@ -385,7 +390,7 @@ ul {
 		color: var(--color-text-alt);
 	}
 }
-.link {
+.link, .article a {
 	display: inline-flex;
 	align-items: center;
 	gap: mi.rem(10);
@@ -400,16 +405,29 @@ ul {
 			color: var(--link-hover-color, var(--color-primary));
 		}
 	}
+	&_strong {
+		--color: var(--color-text-alt);
+	}
+}
+.article a {
+	--color: var(--color-text-alt);
 }
 .underline {
 	text-decoration: underline;
 }
 .cm-checkbox {
+	position: relative;
 	color: var(--checbox-color, var(--color-primary));
 	display: inline-grid;
 	cursor: pointer;
 	&__input {
-		display: none;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		opacity: 0;
 	}
 	&__body {
 		grid-row: 1/span 1;
@@ -488,4 +506,42 @@ ul {
 			transition: opacity 0.3s, visibility 0.3s;
 		}	
 	}
+}
+.location {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	&__icon {
+		position: relative;
+		top: -0.1em;
+		color: var(--color-text-alt);
+		font-size: 0.9em;
+	}
+}
+[name="free-cheese"] {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 0;
+	height: 0;
+	min-width: 0;
+}
+.ann-slide-up {
+	opacity: 0;
+	transform: translateY(mi.rem(20));
+	will-change: transform;
+	:root._ready &._shown {
+		opacity: 1;
+		transform: none;
+		transition: transform 0.5s ease-in-out var(--ann-delay, 0s), opacity 0.5s ease-in-out var(--ann-delay, 0s);
+	}
+}
+.ann-delay-01 {
+	--ann-delay: 0.1s;
+}
+.ann-delay-02 {
+	--ann-delay: 0.2s;
+}
+.ann-delay-04 {
+	--ann-delay: 0.4s;
 }

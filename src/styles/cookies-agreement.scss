@@ -1,15 +1,11 @@
 @use "./mixins.scss" as mi;
 @use "./config.scss" as config;
 
-.drawer {
-		&__panel {
-		}
-}
 .coockies-agreement {
 	display: flex;
 	justify-content: end;
 	align-items: end;
-	padding: mi.rem(20);
+	padding: mi.rem(30) mi.rem(20);
 	opacity: 0;
 	visibility: hidden;
 	transform: translateY(mi.rem(20));
@@ -25,10 +21,10 @@
 		justify-content: space-between;
 		align-items: center;
 		gap: mi.rem(66);
-		max-width: mi.rem(555);
-		padding: mi.rem(30);
+		max-width: mi.rem(500);
+		padding: mi.rem(20);
 		background-color: var(--color-sf-root);
-		border-radius: mi.rem(20);
+		border-radius: mi.rem(10);
 		color: var(--color-text-base-muted);
 	}
 	&__btn {

@@ -6,6 +6,14 @@
 	background-color: var(--color-sf-alt);
 	--link-hover-color: var(--color-primary-lvl-up);
 	overflow: hidden;
+	&__company-name {
+		position: absolute;
+		display: inline-block;
+		max-width: 0;
+		max-height: 0;
+		overflow: hidden;
+		visibility: hidden;
+	}
 	&__container {
 		display: grid;
 		grid-template-columns: 4.4fr 4.6fr 4.6fr;

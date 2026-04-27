@@ -8,11 +8,11 @@
 	const { className, mode, size } = Astro.props;
 ---
 <div class:list={["social", className, size && `social_${size}`]}>
-	<a href="#" class:list={["btn btn_social", mode && `btn_${mode}`, size && `btn_${size}`]}>
+	<a href="#" target="_blank" class:list={["btn btn_social", mode && `btn_${mode}`, size && `btn_${size}`]}>
 		<div class="btn__icon icon-telegram"></div>
 		<div class="btn__label btn__label_hidden">Telegram</div>
 	</a>
-	<a href="#" class:list={["btn btn_social", mode && `btn_${mode}`, size && `btn_${size}`]}>
+	<a href="#" target="_blank" class:list={["btn btn_social", mode && `btn_${mode}`, size && `btn_${size}`]}>
 		<div class="btn__icon icon-watsapp"></div>
 		<div class="btn__label btn__label_hidden">WatsApp</div>
 	</a>

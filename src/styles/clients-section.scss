@@ -28,6 +28,9 @@
 			padding: mi.rem(20) mi.rem(20);
 		}
 	}
+	&__main {
+		padding-right: 0;
+	}
 	&__stat {
 		@media (max-width: config.$mbpM) {
 			padding-top: 30px;
@@ -35,18 +38,17 @@
 	}
 	&__main {
 		display: grid;
-		border-right: mi.rem(1) solid var(--color-border);
-		@media (max-width: config.$mbpM) {
-			border-right: none;
-		}
 	}
 	&__main-inner {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		padding-right: mi.rem(20);
+		border-right: mi.rem(1) solid var(--color-border);
 		@media (max-width: config.$mbpM) {
 			border-bottom: mi.rem(1) solid var(--color-border);
 			padding-bottom: 20px;
+			border-right: none;
 		}
 	}
 	&__list {
@@ -119,6 +121,9 @@
 			grid-column: 1/span 1;
 			width: 50.84%;
 		}
+		& img {
+			width: 100%;
+		}
 		&::before {
 			grid-row: 1/span 1;
 			grid-column: 1/span 1;
@@ -133,20 +138,22 @@
 		justify-content: end;
 		@media (min-width: (config.$mbpM + 1px)) and (max-width: config.$mbpT) {
 			align-items: end;
-			text-align: right;
 		}
 		@media (max-width: config.$mbpM) {
 			align-items: start;
 		}
 	}
 	&__number {
+		display: inline-block;
 		color: var(--color-text-alt);
 		font-weight: 600;
 		font-size: mi.rem(140);
 		line-height: 1;
 		letter-spacing: -0.07em;
 		white-space: nowrap;
-		@include mi.aval(font-size, 60, 140, "end", 768, 1440);
+		margin-bottom: 0.1em;
+		@include mi.aval(font-size, 110, 140, "none", 768, 992);
+		@include mi.aval(font-size, 60, 110, "end", 575, 767);
 	}
 	&__number-sign {
 		color: var(--color-primary);

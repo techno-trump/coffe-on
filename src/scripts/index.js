@@ -1,6 +1,6 @@
 import "../styles/index.scss";
 import intlTelInput from 'intl-tel-input';
-import Inputmask from "inputmask/dist/inputmask.es6.js";
+import IMask from "imask";
 import "vanilla-drawers";
 import throttle from "lodash.throttle";
 import Swiper from "swiper";
@@ -27,8 +27,38 @@ matchMedia("(min-width: 1301px)").addEventListener("change", () => app.drawers.c
 
 initDisclosures();
 app.drawers.init();
+if (!localStorage.getItem('cookiesAgreementShowed')) {
+	
+}
+app.drawers.get("coockies-agreement")?.setOptions({ closeOnUnderlayClick: false });
+app.drawers.get("coockies-agreement").on("close", () => {
+	localStorage.setItem('cookiesAgreementShowed', 'true');
+});
+document.querySelector("#coockies-agreement-btn")?.addEventListener("click", () => {
+	localStorage.setItem('cookiesAccepted', 'true');
+});
+if (!localStorage.getItem('cookiesAgreementShowed')) {
+	app.drawers.open("coockies-agreement");
+}
 
-app.drawers.get("coockies-drawer")?.setOptions({ closeOnUnderlayClick: false });
+if (window.location.hash) {
+	setTimeout(() => window.app.lenis.scrollTo(window.location.hash, { offset: -40, duration: 2 }), 500);
+}
+document.querySelectorAll(`[href*="#"], [href*="/#"]`).forEach(elem => {
+	elem.addEventListener("click", (e) => {
+		const href = elem.getAttribute("href");
+		if (!href.includes(window.location.host + window.location.pathname)) return;
+		e.preventDefault();
+		const pattern = /.*?(\#.*)/;
+		const match = href.match(pattern);
+		const anchor = match ? match[1] : null;
+
+		history.pushState(null, "", anchor);
+		app.drawers.close("burger-panel");
+		window.app.lenis.scrollTo(anchor, { offset: -40, duration: 2 });
+	});
+});
+
 
 // Show secondary header
 const secondaryHeader = document.querySelector(".header_second");
@@ -51,13 +81,14 @@ const intersectionObserver = new IntersectionObserver((entries) => {
 			entry.target.classList.add("_shown");
 		}
 	});
-}, { threshold: window.innerWidth <= 768 ? 0.4 : 0.8 });
+}, { rootMargin: "0% 0% -24% 0%" });
 
-document.querySelectorAll(`[data-component*=":intersection-observer:"]`).forEach(elem => {
+document.querySelectorAll(`[data-component*=":isn-observer:"]`).forEach(elem => {
 	intersectionObserver.observe(elem);
 });
 
 document.querySelectorAll(`[data-component*=":tel-input:"]`).forEach(root => {
+	let maskInstance;
 	const iti = intlTelInput(root, {
 		initialCountry: "ru",
 		nationalMode: true,
@@ -68,6 +99,15 @@ document.querySelectorAll(`[data-component*=":tel-input:"]`).forEach(root => {
 	});
 	iti.promise.then(useMask);
 	root.addEventListener("countrychange", useMask);
+		// при фокусе включаем полный placeholder
+	root.addEventListener('focus', () => {
+		maskInstance.updateOptions({ lazy: false });
+	});
+
+	// при blur возвращаем в lazy-режим
+	root.addEventListener('blur', () => {
+		maskInstance.updateOptions({ lazy: true });
+	});
 
 	function useMask() {
 		const { utils } = intlTelInput;
@@ -75,8 +115,13 @@ document.querySelectorAll(`[data-component*=":tel-input:"]`).forEach(root => {
 		const country = iti.getSelectedCountryData();
 		const example = root.getAttribute("placeholder");//utils.getExampleNumber(country.iso2, true, utils.numberType.MOBILE);
 		//const formatted = utils.formatNumber(example, country.iso2, utils.numberFormat.NATIONAL);
-		const mask = example.replace(/^.*?\(/, "(").replace(/[0-9]/g, "9");
-		Inputmask({ mask, rightAlign: false }).mask(root);
+		const mask = example.replace(/^.*?\(/, "(").replace(/[0-9]/g, "0");
+		//Inputmask({ mask, rightAlign: false }).mask(root);
+		if (maskInstance) {
+			maskInstance.updateOptions({ mask });
+		} else {
+			maskInstance = IMask(root, { mask,  placeholderChar: '_' });
+		}
 	}
 });
 

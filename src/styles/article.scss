@@ -37,16 +37,14 @@
 	}
 	&_news &__body {
 		display: grid;
-		grid-template-columns: 4.4fr 9fr;
-		gap: mi.rem(20);
-		@media (max-width: config.$mbpM) {
-			grid-template-columns: 1fr;
+		grid-template-columns: 100%;
+		gap: mi.rem(40);
+		@media (max-width: config.$mbpT) {
+			gap: mi.rem(30);
 		}
 	}
-	&__request {
-		@media (max-width: config.$mbpM) {
-			display: none;
-		}
+	&_news &__aside {
+		grid-row: 2/span 1;
 	}
 	&__body_wide {
 		display: grid;

@@ -53,20 +53,22 @@ $block: ".select";
 	}
 	&__option {
 		cursor: pointer;
-		transition: background-color 0.3s;
+		transition: background-color 0.3s, color 0.3s;
 		
 		&.selected {
+			color: var(--color-text-base);
 			background-color: var(--color-primary);
 		}
 		padding: mi.rem(5);
 		@media (any-hover: hover) {
 			&:hover {
+				color: var(--color-text-base);
 				background-color: var(--color-primary);
 			}
 		}
 	}
-	& .dropdown-input {
-		padding: mi.rem(5);
+	& .dropdown-input-wrap {
+		display: none;
 	}
 	&__item {
 		flex: 0 1 auto;
@@ -86,6 +88,5 @@ $block: ".select";
 		min-width: mi.rem(280);
 		color: var(--color-text-base-muted);
 		background-color: var(--color-sf-base);
-		padding: mi.rem(5) 0;
 	}
 }

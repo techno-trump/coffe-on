@@ -27,9 +27,16 @@ body {
 }
 input,
 button,
+select,
 textarea {
 	font-family: inherit;
 	font-size: inherit;
+	border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+  background: none;
+  box-shadow: none;
+  outline: none;
 }
 button {
 	cursor: pointer;

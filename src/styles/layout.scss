@@ -24,7 +24,7 @@ html {
 	--scroll-compensation: 0px;
 }
 html.scroll-lock-by-drawer {
-	overflow: hidden;
+	//overflow: hidden;
 	--scroll-compensation: var(--scroll-width);
 	padding-right: var(--scroll-width);
 }

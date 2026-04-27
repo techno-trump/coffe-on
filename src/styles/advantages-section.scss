@@ -12,6 +12,7 @@
 	@media (max-width: config.$mbpM) {
 		grid-template-columns: 100%;
 		padding: 0 var(--container-save-space);
+		grid-auto-rows: auto;
 	}
 	&__item {
 		&:nth-child(3) {
@@ -65,6 +66,9 @@
 	
 	&__item-icon {
 		margin-bottom: mi.rem(40);
+		@media (max-width: config.$mbpM) {
+			margin-bottom: mi.rem(20);
+		}
 	}
 	&__item-title {
 		margin-bottom: mi.rem(20);
@@ -80,4 +84,10 @@
 	&__item:not(:nth-child(3)) &__item-desc {
 		color: var(--color-text-base-muted);
 	}
+	@media (max-width: config.$mbpM) {
+		&__item:not(:nth-child(4)) &__item-desc {
+			color: var(--color-text-base-muted);
+		}
+	}
+	
 }

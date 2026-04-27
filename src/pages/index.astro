@@ -34,20 +34,20 @@ import Layout from '../layouts/Layout.astro';
 		<div class="container hero-section__container">
 			<div class="hero-section__info">
 				<div class="hero-section__header">
-					<h1 class="hero-section__title">Бесплатная установка и обслуживание вендинговых аппаратов</h1>
-					<div class="hero-section__sub-title tg-text-normal">Кофейные автоматы и снековые автоматы с размещением в Москве и МО от 3-х дней</div>
+					<h1 class="hero-section__title ann-slide-up" data-component=":isn-observer:">Бесплатная установка и обслуживание вендинговых аппаратов</h1>
+					<div class="hero-section__sub-title tg-text-normal ann-slide-up ann-delay-02 _shown" data-component=":isn-observer:">Кофейные автоматы и снековые автоматы с размещением в Москве и МО от 3-х дней</div>
 				</div>
-				<button type="button" class="hero-section__request btn btn_rect btn_lg btn_primary">
+				<button type="button" data-drawer-open="contact-form" class="hero-section__request btn btn_rect btn_lg btn_primary ann-slide-up ann-delay-04 _shown">
 					<span class="btn__label">Оставить заявку</span>
 					<span class="btn__icon icon-arrow-right"></span>
 				</button>
 			</div>
 		</div>
 	</section>
-	<section class="agregates section-space-top-big section-space-bottom">
+	<section id="agregates" class="agregates section-space-top-big section-space-bottom">
 		<div class="container agregates__container">
 			<div class="agregates__card agregates-promo-card">
-				<div class="agregates-promo-card__title tg-h2">Надежные итальянские автоматы</div>
+				<div class="agregates-promo-card__title tg-h2 ann-slide-up _shown" data-component=":isn-observer:">Надежные итальянские автоматы</div>
 				<div class="agregates-promo-card__footer">
 					<div class="agregates-promo-card__tip tg-text-normal">Бесплатно доставим и установим аппарат</div>
 					<button type="button" class="agregates-promo-card__request btn btn_rect btn_lg btn_primary">
@@ -84,7 +84,7 @@ import Layout from '../layouts/Layout.astro';
 			</a>
 		</div>
 	</section>
-	<section class="section-space">
+	<section id="advantages" class="section-space">
 		<div class="container section__header">
 			<div class="section__title tg-text-normal">Преимущества</div>
 			<div class="section__desc tg-h2">Наш подход к работе</div>
@@ -108,7 +108,7 @@ import Layout from '../layouts/Layout.astro';
 			
 		</div>
 	</section>
-	<section class="clients-section section-space-top section-space-bottom-small tg-text-normal">
+	<section id="testimonials" class="clients-section section-space-top section-space-bottom-small tg-text-normal">
 		<div class="clients-section__wrap">
 			<div class="clients-section__container">
 				<div class="clients-section__main">
@@ -143,7 +143,7 @@ import Layout from '../layouts/Layout.astro';
 						<div class="clients-section__logos-wrap">
 							{
 								["eurohim.png", "moslift.png", "delowyjelinii.png", "invitro.png", "consulstvo.png", "cosmos.png", "bank.png", "medicine.png"]
-									.map((imgSrc) => <div class="clients-section__logo"><img src={`img/logos/${imgSrc}`} alt=""></div>)
+									.map((imgSrc) => <div class="clients-section__logo"><picture><img src={`img/logos/${imgSrc}`} alt=""></picture></div>)
 							}
 						</div>
 					</div>
@@ -160,7 +160,7 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 		</div>
 	</section>
-	<section class="cases-slider-section section-space-bottom">
+	<section id="cases" class="cases-slider-section section-space-bottom">
 		<div class="container cases-slider-section__slider" data-component=":cases-slider:">
 			<div class="cases-slider-section__wrapper">
 				{
@@ -184,7 +184,7 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 		</div>
 	</section>
-	<section class="section-space">
+	<section id="installation" class="section-space">
 		<div class="container">
 			<div class="section__header steps-section__header">
 				<div class="section__title tg-text-normal">Этапы работы</div>
@@ -214,7 +214,7 @@ import Layout from '../layouts/Layout.astro';
 				<div class="form-section__note">Для установки потребуется только 1м<sup>2</sup> площади и розетка</div>
 			</div>
 			<form class="form-section__form form-section__form">
-				<input class="form-input" name="full-name" type="text" required placeholder="Имя*">
+				<input class="form-input" name="name" type="text" required placeholder="Имя*">
 				<input class="form-input" name="tel" type="text" required  data-component=":tel-input:">
 				<select class="form-select" name="location-type" data-component=":select:">
 					<option value="" disabled selected>Тип помещения</option>
@@ -236,13 +236,13 @@ import Layout from '../layouts/Layout.astro';
 			</form>
 		</div>
 	</section>
-	<section class="section-space-top section-space-small-bottom">
+	<section id="about" class="section-space-top section-space-bottom-small">
 		<div class="container">
 			<div class="section__header steps-section__header">
 				<div class="section__title tg-text-normal">О компании</div>
 				<div class="section__desc tg-h2">Более 20 лет опыта работы с вендинговыми аппаратами</div>
 			</div>
-			<div class="stats section-space-small">
+			<div class="stats section-space-bottom-small">
 				<div class="stats-item stats-item_main">
 					<div class="stats-item__heading tg-text-big">Работаем<br>с 2004 года</div>
 					<p class="stats-item__description tg-text-normal">
@@ -277,7 +277,7 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 		</div>
 	</section>
-	<section class="section-space-bottom overflow-hidden">
+	<section id="staff" class="section-space-bottom overflow-hidden">
 		<div class="container staff-slider" data-component=":staff-slider:">
 			<div class="staff-slider__wrapper">
 				{
@@ -302,10 +302,10 @@ import Layout from '../layouts/Layout.astro';
 				<div class="form-section__note">Заполните форму, и наш менеджер свяжется с вами в ближайшее время</div>
 			</div>
 			<form class="form-section__form form-section__form">
-				<input class="form-input" name="full-name" type="text" required placeholder="Имя*">
+				<input class="form-input" name="name" type="text" required placeholder="Имя*">
 				<input class="form-input" name="tel" type="text" required  data-component=":tel-input:">
 				<select class="form-select form-section__field_lg" name="location-type" data-component=":select:">
-					<option value="" disabled selected>Тип помещения</option>
+					<option value=""></option>
 					<option value="Торговый центр">Торговый центр</option>
 					<option value="Минимаркет">Минимаркет</option>
 				</select>
@@ -333,7 +333,7 @@ import Layout from '../layouts/Layout.astro';
 			</form>
 		</div>
 	</section>
-	<section class="section-space news-list-section" data-component=":news-slider:">
+	<section id="news" class="section-space news-list-section" data-component=":news-slider:">
 		<div class="container news-list-section__container">
 			<div class="news-list-section__header">
 				<div class="news-list-section__title tg-h2">Новости и акции</div>
@@ -375,7 +375,7 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 		</div>
 	</section>
-	<section class="section-space faq-section">
+	<section id="faq" class="section-space faq-section">
 		<div class="container faq-section__container">
 			<div class="faq-section__title tg-h2">Отвечаем на частые вопросы</div>
 			<div class="faq-section__body">
@@ -411,7 +411,7 @@ import Layout from '../layouts/Layout.astro';
 				<div class="form-section__note">Ваше мнение поможет нам улучшить работу</div>
 			</div>
 			<form class="form-section__form form-section__form">
-				<input class="form-input" name="full-name" type="text" required placeholder="Имя*">
+				<input class="form-input" name="name" type="text" required placeholder="Имя*">
 				<input class="form-input" name="tel" type="text" required  data-component=":tel-input:">
 				<textarea class="form-input form-section__field_lg" name="comment" placeholder="Комментарий"></textarea>
 				<label class="form-checkbox form-section__agreement form-section__field_lg">
